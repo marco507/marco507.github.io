@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	Comments on: PDF Summarization and Flashcard Generation with ChatGPT	</title>
+	<atom:link href="https://marco507.github.io/pdf-summarization-and-flashcard-generation-with-chatgpt/feed/" rel="self" type="application/rss+xml" />
+	<link>https://marco507.github.io/pdf-summarization-and-flashcard-generation-with-chatgpt/</link>
+	<description>Programming, AI and Data Science</description>
+	<lastBuildDate>Wed, 25 Oct 2023 10:00:16 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>
+		By: Building a Private AI Tutor for a Microsoft Learn Course &#8211; BigDataTime		</title>
+		<link>https://marco507.github.io/pdf-summarization-and-flashcard-generation-with-chatgpt/#comment-4</link>
+
+		<dc:creator><![CDATA[Building a Private AI Tutor for a Microsoft Learn Course &#8211; BigDataTime]]></dc:creator>
+		<pubDate>Wed, 25 Oct 2023 10:00:16 +0000</pubDate>
+		<guid isPermaLink="false">https://marco507.github.io/?p=442#comment-4</guid>
+
+					<description><![CDATA[[&#8230;] follows the same logic as the PDF conversion pipeline that was used for the ChatGPT flashcard generator and document summarizer, where the headings are used to split up a larger file into chapters. This semantically correct [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] follows the same logic as the PDF conversion pipeline that was used for the ChatGPT flashcard generator and document summarizer, where the headings are used to split up a larger file into chapters. This semantically correct [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

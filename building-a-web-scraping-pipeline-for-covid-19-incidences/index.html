@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+
+<title>Building a Web Scraping Pipeline for Covid-19 Incidences &#8211; BigDataTime</title>
+<meta name="robots" content="max-image-preview:large">
+
+<script>MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']], 
+    processEscapes: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore|editor-rich-text'
+  }
+};</script>
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+<link rel="alternate" type="application/rss+xml" title="BigDataTime &raquo; Feed" href="https://marco507.github.io/feed/">
+<link rel="alternate" type="application/rss+xml" title="BigDataTime &raquo; Comments Feed" href="https://marco507.github.io/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="BigDataTime &raquo; Building a Web Scraping Pipeline for Covid-19 Incidences Comments Feed" href="https://marco507.github.io/building-a-web-scraping-pipeline-for-covid-19-incidences/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/marco507.github.io\/wp-includes\/js\/wp-emoji-release.min.js?ver=bb270fba1988038f5680f75b7475565e"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"🏳️‍⚧️","🏳️​⚧️")?!1:!n(e,"🇺🇳","🇺​🇳")&&!n(e,"🏴󠁧󠁢󠁥󠁮󠁧󠁿","🏴​󠁧​󠁢​󠁥​󠁮​󠁧​󠁿");case"emoji":return!n(e,"🫱🏻‍🫲🏿","🫱🏻​🫲🏿")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<link rel="stylesheet" id="occasio-theme-fonts-css" href="https://marco507.github.io/wp-content/fonts/aa39170267083d285467854f55bbd6ba.css?ver=20201110" type="text/css" media="all">
+<style id="wp-emoji-styles-inline-css" type="text/css">img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}</style>
+<link rel="stylesheet" id="wp-block-library-css" href="https://marco507.github.io/wp-includes/css/dist/block-library/style.min.css?ver=bb270fba1988038f5680f75b7475565e" type="text/css" media="all">
+<style id="classic-theme-styles-inline-css" type="text/css">/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}</style>
+<style id="global-styles-inline-css" type="text/css">body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--primary: #2a4861;--wp--preset--color--secondary: #5d7b94;--wp--preset--color--tertiary: #90aec7;--wp--preset--color--accent: #60945d;--wp--preset--color--highlight: #915d94;--wp--preset--color--light-gray: #ededef;--wp--preset--color--gray: #84848f;--wp--preset--color--dark-gray: #24242f;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 16px;--wp--preset--font-size--medium: 24px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--extra-large: 48px;--wp--preset--font-size--huge: 64px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}</style>
+<link rel="stylesheet" id="sp-ea-font-awesome-css" href="https://marco507.github.io/wp-content/plugins/easy-accordion-free/public/assets/css/font-awesome.min.css?ver=2.2.5" type="text/css" media="all">
+<link rel="stylesheet" id="sp-ea-style-css" href="https://marco507.github.io/wp-content/plugins/easy-accordion-free/public/assets/css/ea-style.css?ver=2.2.5" type="text/css" media="all">
+<style id="sp-ea-style-inline-css" type="text/css">#sp-ea-367 .spcollapsing { height: 0; overflow: hidden; transition-property: height;transition-duration: 300ms;}#sp-ea-367.sp-easy-accordion>.sp-ea-single {border: 1px solid #e2e2e2; }#sp-ea-367.sp-easy-accordion>.sp-ea-single>.ea-header a {color: #444;}#sp-ea-367.sp-easy-accordion>.sp-ea-single>.sp-collapse>.ea-body {background: #fff; color: #444;}#sp-ea-367.sp-easy-accordion>.sp-ea-single {background: #eee;}#sp-ea-367.sp-easy-accordion>.sp-ea-single>.ea-header a .ea-expand-icon.fa { float: left; color: #444;font-size: 16px;}</style>
+<link rel="stylesheet" id="eeb-css-frontend-css" href="https://marco507.github.io/wp-content/plugins/email-encoder-bundle/core/includes/assets/css/style.css?ver=231115-134229" type="text/css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="https://marco507.github.io/wp-includes/css/dashicons.min.css?ver=bb270fba1988038f5680f75b7475565e" type="text/css" media="all">
+<link rel="stylesheet" id="cmplz-general-css" href="https://marco507.github.io/wp-content/plugins/complianz-gdpr/assets/css/cookieblocker.min.css?ver=6.5.5" type="text/css" media="all">
+<link rel="stylesheet" id="occasio-stylesheet-css" href="https://marco507.github.io/wp-content/themes/occasio/style.css?ver=1.1.2" type="text/css" media="all">
+<script type="text/javascript" src="https://marco507.github.io/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://marco507.github.io/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="https://marco507.github.io/wp-content/plugins/email-encoder-bundle/core/includes/assets/js/custom.js?ver=231115-134229" id="eeb-js-frontend-js"></script>
+<script type="text/javascript" src="https://marco507.github.io/wp-content/themes/occasio/assets/js/svgxuse.min.js?ver=1.2.6" id="svgxuse-js"></script>
+<link rel="https://api.w.org/" href="https://marco507.github.io/wp-json/">
+<link rel="alternate" type="application/json" href="https://marco507.github.io/wp-json/wp/v2/posts/357">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://marco507.github.io/xmlrpc.php?rsd">
+<link rel="canonical" href="https://marco507.github.io/building-a-web-scraping-pipeline-for-covid-19-incidences/">
+<style>.cmplz-hidden{display:none!important;}</style>
+<link rel="icon" href="https://marco507.github.io/wp-content/uploads/2023/07/cropped-bigdatatime-favicon-3-32x32.png" sizes="32x32">
+<link rel="icon" href="https://marco507.github.io/wp-content/uploads/2023/07/cropped-bigdatatime-favicon-3-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://marco507.github.io/wp-content/uploads/2023/07/cropped-bigdatatime-favicon-3-180x180.png">
+<meta name="msapplication-TileImage" content="https://marco507.github.io/wp-content/uploads/2023/07/cropped-bigdatatime-favicon-3-270x270.png">
+<style id="wpforms-css-vars-root">:root {
+					--wpforms-field-border-radius: 3px;
+--wpforms-field-background-color: #ffffff;
+--wpforms-field-border-color: rgba( 0, 0, 0, 0.25 );
+--wpforms-field-text-color: rgba( 0, 0, 0, 0.7 );
+--wpforms-label-color: rgba( 0, 0, 0, 0.85 );
+--wpforms-label-sublabel-color: rgba( 0, 0, 0, 0.55 );
+--wpforms-label-error-color: #d63637;
+--wpforms-button-border-radius: 3px;
+--wpforms-button-background-color: #066aab;
+--wpforms-button-text-color: #ffffff;
+--wpforms-field-size-input-height: 43px;
+--wpforms-field-size-input-spacing: 15px;
+--wpforms-field-size-font-size: 16px;
+--wpforms-field-size-line-height: 19px;
+--wpforms-field-size-padding-h: 14px;
+--wpforms-field-size-checkbox-size: 16px;
+--wpforms-field-size-sublabel-spacing: 5px;
+--wpforms-field-size-icon-size: 1;
+--wpforms-label-size-font-size: 16px;
+--wpforms-label-size-line-height: 19px;
+--wpforms-label-size-sublabel-font-size: 14px;
+--wpforms-label-size-sublabel-line-height: 17px;
+--wpforms-button-size-font-size: 17px;
+--wpforms-button-size-height: 41px;
+--wpforms-button-size-padding-h: 15px;
+--wpforms-button-size-margin-top: 10px;
+
+				}</style>
+</head>
+
+<body data-rsssl="1" class="post-template-default single single-post postid-357 single-format-standard wp-embed-responsive centered-theme-layout has-sidebar is-blog-page">
+
+	
+	<div id="page" class="site">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		
+		<header id="masthead" class="site-header" role="banner">
+
+			<div class="header-main">
+
+				
+				
+<div class="site-branding">
+
+	
+			<p class="site-title"><a href="https://marco507.github.io/" rel="home">BigDataTime</a></p>
+
+			
+			<p class="site-description">Programming, AI and Data Science</p>
+
+			
+</div>
+<!-- .site-branding -->
+
+				
+
+	<button class="primary-menu-toggle menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+		<svg class="icon icon-menu" aria-hidden="true" role="img"> <use xlink:href="https://bigdatatime.eu/wp-content/themes/occasio/assets/icons/genericons-neue.svg#menu"></use> </svg><svg class="icon icon-close" aria-hidden="true" role="img"> <use xlink:href="https://bigdatatime.eu/wp-content/themes/occasio/assets/icons/genericons-neue.svg#close"></use> </svg>		<span class="menu-toggle-text">Menu</span>
+	</button>
+
+	<div class="primary-navigation">
+
+		<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+
+			<ul id="primary-menu" class="menu">
+<li id="menu-item-113" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-113"><a href="https://marco507.github.io/about/">About</a></li>
+<li id="menu-item-618" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-618"><a rel="privacy-policy" href="https://marco507.github.io/privacy-policy/">Privacy Policy</a></li>
+<li id="menu-item-619" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-619"><a href="https://marco507.github.io/cookie-policy-eu/">Cookie Policy</a></li>
+<li id="menu-item-620" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-620"><a href="https://marco507.github.io/imprint/">Imprint</a></li>
+</ul>		</nav><!-- #site-navigation -->
+
+	</div>
+<!-- .primary-navigation -->
+
+
+
+			</div>
+<!-- .header-main -->
+
+		</header><!-- #masthead -->
+
+		
+		
+		<div id="content" class="site-content">
+
+			<main id="main" class="site-main" role="main">
+
+				
+				
+<article id="post-357" class="post-357 post type-post status-publish format-standard has-post-thumbnail hentry category-app-development category-python">
+
+	
+			<figure class="post-image post-image-single">
+				<img width="800" height="440" src="https://marco507.github.io/wp-content/uploads/2023/07/web-scraping_cover-image-800x440.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" decoding="async" fetchpriority="high">			</figure>
+
+			
+	<header class="post-header entry-header">
+
+		<h1 class="post-title entry-title">Building a Web Scraping Pipeline for Covid-19 Incidences</h1>
+		<div class="entry-meta">
+<div class="entry-categories"> <ul class="post-categories">
+	<li><a href="https://marco507.github.io/category/app-development/" rel="category tag">App Development</a></li>
+	<li><a href="https://marco507.github.io/category/python/" rel="category tag">Python</a></li>
+</ul>
+</div>
+<span class="posted-on"><a href="https://marco507.github.io/building-a-web-scraping-pipeline-for-covid-19-incidences/" rel="bookmark"><time class="entry-date published" datetime="2023-07-13T10:39:49+02:00">13. July 2023</time><time class="updated" datetime="2023-07-13T12:15:42+02:00">13. July 2023</time></a></span><span class="posted-by"> <span class="author vcard"><a class="url fn n" href="https://marco507.github.io/author/marco-schweiss/" title="View all posts by Marco Schweiss" rel="author">Marco Schweiss</a></span></span>
+</div>
+		
+	</header><!-- .entry-header -->
+
+	
+<div class="entry-content">
+
+	<p>The internet is a nearly limitless source of information. This content is available to anyone with an internet connection and can be found in the form of text, audio, images, and videos. Because not every piece of information or type of format is important to each user, data retrieval can be a tedious task. Often, rather than being a convenience, this abundance of information might be a problem. To combat this issue and to satisfy the increasing need for data, processes that facilitate the retrieval of data need to be implemented. An example of such a process is web scraping which is used to create platforms where interesting data from different sources is aggregated to reduce information overload.</p>
+<p>A good use case to employ web scraping technology is thereby the challenges of COVID-19-related data retrieval and aggregation. Thereby web scraping can be used to address the problem that different countries publish their data in various formats, channels, and intervals. This can make it difficult for researchers to fetch vital datasets for COVID-19-related research in an effective manner. Research concerning COVID-19 is an essential and ongoing effort starting just a few months since the virus began spreading around the globe. Thereby researchers are making great efforts to understand the virus’s characteristics, the causes of its effects, and possible precautionary care.</p>
+<p>Not only can academic research benefit from facilitated access to data, but also for the general public, this aggregated data can be helpful. But in contrast to academics, normal people are used to seeing more easily interpretable figures and graphs that illustrate the development of data. Thereby different types of data visualizations like how COVID-19 affects specific geographic locations or age groups and the visualization of key metrics over time can aid in the understanding of the virus characteristics.</p>
+<p>As has been explained, individuals often spend a lot of time and effort trying to find the most recent information from multiple sources. This is inconvenient, and as a result, we need a system capable of providing targeted, aggregated, and up-to-date information for important COVID-19-related metrics, which are normally scattered around various websites. The developed web scraping application, which is specialized in aggregating data from the DACH region, allows users to access a visualization of three key metrics, namely the total infections, total deaths, and the seven-day incidence.</p>
+<p>This concise overview of three of the most important metrics regarding COVID-19 aims to reduce information overload while still providing a good picture of the current situation in the three countries of the DACH region. Thereby the data is scraped from three selected sources at a daily interval. To facilitate COVID-19-related research, the data which has been scraped since deploying the application can be downloaded in HDF5 format and further analyzed.</p>
+<h2>A Primer on Web Scraping</h2>
+<p>Web scraping is a data mining technique used to extract unstructured information from various online resources, format the data so it can be saved and analyzed in a database, and then convert the obtained data into a structure that is more valuable for the user. A well-organized web scraper routinely scans targeted data sources and gathers valuable information into an actionable database. Web scraping has many forms, including copying and pasting, HTML parsing, or text grabbing.</p>
+<p>The retrieval of the data can roughly be divided into two steps which are executed sequentially. First, a connection to the requested website is established, and following the content of the website is extracted. In essence, the web scraper copies the classical behavior of a user when surfing the web, searching for and downloading information, only that the actions are automated. To date, a variety of tools and techniques for web scraping are in existence, with the two most popular being parsing the HTML of a website or simulating a complete browser. The latter of the methods can be used if dynamically generated websites that rely on JavaScript being executed by the browser prohibit the first method.</p>
+<p>The internet’s popularity was the catalyst of the need to scrape online resources. The first famous scrapers were created to search for information by search engine developers. These types of scrapers go through most of the internet, analyze every web page, extract information from it, and build a searchable index. The use of web scraping has grown in a variety of diverse fields, including e-commerce, content creation for the web, real estate, tourism, finance, and law.</p>
+<h2>Literature Review</h2>
+<p>Before creating the web application, a literature review was conducted to get an overview of possible use cases and research applications of web scraping technology. For example, public health and epidemiology investigations frequently involve web scraping. Researchers can possibly identify risks and food dangers and also anticipate possible future epidemics by scraping and analyzing textual data stored on the world wide web.</p>
+<p>An example would be that Pollett and co used a web scraping approach to gather unorganized online news data to enable them to identify outbreaks and epidemics of vector-borne diseases. Another example would be Walid and associates, who gathered Twitter data over two years to develop a cancer detection and prediction algorithm. Thereby the team combined the Twitter data and sentiment analysis with natural language processing. In 2015, Majumder et al. used web-scraped health information from HealthMap in conjunction with Google Trend time series information to determine the projected size of a Zika virus pandemic.</p>
+<p>As already mentioned, web scraping is also being used to identify food-related dangers. Ihm and coworkers developed a method to defuse and manage food emergencies in Korea by scraping social media and news for events involving food hazards. Another example would be the usage of web scraping for gathering Yelp reviews to discover cases of food-related illnesses which were not reported. This was done by the New York City Department of Health and Mental Hygiene between 2013 and 2014.</p>
+<p>Similar studies have also been conducted in regard to COVID-19-related issues. Lan et al. sought to assess the discourse on policies to deal with the coronavirus pandemic through official press articles, social networks, and media outlets. Xu and colleagues scraped Weibo postings from Wuhan to assess public sentiment, understanding, and attitudes in the lead-up to the early stages of the COVID-19 pandemic. Future policy decisions and future epidemic responses may be guided by their findings.</p>
+<h2>Project Methodology</h2>
+<p>One significant barrier is the lack of a standardized, regularly updated, and high-quality data source for information on COVID-19 cases in the DACH region. This is due to the fact that the different nations distribute information on unique platforms, institutions, and time cycles that negatively affect researchers’ access to crucial coronavirus datasets for medical analyses at satisfactory resolutions.</p>
+<p>To overcome this problem, the developed web application is set up to look for statistical information on COVID-19 using web scraping procedures. Three websites, namely www.rki.de, coron-avirus.datenfakten.at, and www.corona-in-zahlen.de, form the basis for the collection and aggregation of COVID-19 key metrics. The information about the current development is thereby scraped daily and saved inside a relational database. Following, we will discuss the inner workings of the proposed application.</p>
+<p>The application can really be split into two parts according to their functionality, which is the front-end for display and download of the gathered data and the actual web scraping. The whole application is thereby set up as a web application based on the Django library, a well-known Python library for web applications.</p>
+<h2>Data Scraping Logic</h2>
+<p>The task of gathering the COVID-19 data from the three aforementioned websites is done by a single Python script which is implemented as a Django command and executed by a cronjob which is registered on the server hosting the web application. For scraping, the application leverages the Requests and BeautifulSoup4 library, which will be reviewed in detail later on.</p>
+<p>As already mentioned, the web scraping process is triggered by the cronjob at the scheduled time of eleven PM. The script works by sending an HTTP request to retrieve the raw HTML, which is then parsed with BeautifulSoup4. The parsing process yields a Soup object which is then examined to extract the needed information, which in our case are total infections, total deaths, and the 7-day incidence for each website, respectively. The resulting 9 data points, three for each county, are then saved in the relational database, which is implemented with the SQLite library. The following image illustrates the process.</p>
+<p><img decoding="async" class="aligncenter wp-image-360 size-full" src="https://marco507.github.io/wp-content/uploads/2023/07/web-scraping_scraping-logic-e1689236389419.jpg" alt="" width="476" height="714" srcset="https://marco507.github.io/wp-content/uploads/2023/07/web-scraping_scraping-logic-e1689236389419.jpg 476w, https://marco507.github.io/wp-content/uploads/2023/07/web-scraping_scraping-logic-e1689236389419-200x300.jpg 200w" sizes="(max-width: 476px) 100vw, 476px"></p>
+<p>After discussing the general process of the scraping logic, we will take a look into the two Python libraries used for web scraping, namely Requests and BeautifulSoup4.</p>
+<h3>Requests</h3>
+<p>Requests is a simple, tried-and-true HTTP library for the Python programming language that allows sending HTTP requests very easily. The Requests library is built upon Python’s urllib3, but it lets you manage the vast majority of HTTP use cases with code that is short, pretty, and easy to use. To get a web page, we have to call the get method of the library and issue the website URL as a parameter. The response of the server is then contained in the response object. When working on an application, it’s often required to deal with raw, JSON, or binary response. Therefore it is needed to decode the response of a web server, which is also handled by the Requests library.</p>
+<h3>BeautifulSoup4</h3>
+<p>Beautiful Soup is a Python library for extracting data from HTML and XML files. The library formats and organizes the data from the web by fixing bad HTML and giving us easily traversable Python objects corresponding to XML structures. The most widely used object in the BeautifulSoup library is the BeautifulSoup object which takes the HTML content of a webpage and a parser as arguments. In our case, the HTML content is the response object and specifically the raw string format of the response object and the Python built-in html.parser, which are both passed as arguments.</p>
+<h2>Data Visualization and Provision</h2>
+<p>After looking into the web scraping part of the application, we will now discuss the second part of the application, which is concerned with the visualization of the gathered data and the provision of the data as a HDF5 file. The front end of the web application is implemented as a single page which is served by a Django view function. Thereby the function works by gathering all data from the database inside a dictionary which is then used to generate a figure. The figure is then sent to the browser for rendering. Like the data visualization, the provision of a HDF5 file works on a similar basis. The process starts by clicking the download button on the index page of the web application. This triggers the registered view, which first queries all entries in the database, but instead of creating a figure for visualization, the web application then creates a HDF5 file and serves it as a file to the user.</p>
+<p><img decoding="async" class="aligncenter size-full wp-image-361" src="https://marco507.github.io/wp-content/uploads/2023/07/web-scraping_provision-visualization.jpg" alt="" width="633" height="266" srcset="https://marco507.github.io/wp-content/uploads/2023/07/web-scraping_provision-visualization.jpg 633w, https://marco507.github.io/wp-content/uploads/2023/07/web-scraping_provision-visualization-300x126.jpg 300w" sizes="(max-width: 633px) 100vw, 633px"></p>
+<h3>HDF5</h3>
+<p>To make the gathered dataset accessible for researchers and to facilitate analysis, the format chosen for data provision is the HDF5 file format. HDF5 is used for storing and exchanging data. It supports all types of data, is designed for flexible data input and output, and can store large volumes of complex information. The HDF5 data model is composed of three elements which are datasets, groups, and attributes. A user can use these elements to construct particular application formats that organize data in a way that suits the problem domain. HDF5 also handles all issues related to cross-platform storage, so sharing data with others is a straightforward matter. The actual HDF5 library is implemented in C, and both of the most popular Python interfaces, h5py, and PyTables, are designed as a wrapper around the C library.</p>
+<h3>Pandas HDF5 Capabilities</h3>
+<p>Pandas is a Python library for data analysis with several data structures and functions designed to make working with structured or tabular data more intuitive. Additionally and more relevant for this project, the Pandas library contains functionality for reading and writing HDF5 files, which is implemented with the PyTables library. Thereby a Pandas DataFrame, which is the library table-like data structure, can easily be converted into the datasets, groups, and attributes that make up a HDF5 file.</p>
+<h2>Discussion of the Results</h2>
+<p>Users can access the most recent COVID-19-related information from three websites covering the DACH region with the help of the developed web application. Since the data is scattered around different websites and often buried under a lot of other information, this application provides added value to the original data. People typically do not have the time to research many websites to gather data or information since they are too busy with everyday activities, which makes a central overview of key metrics very convenient.</p>
+<p>Given that the application is processing data that is not originally our own, we must also examine the legal concerns which are tied to a web scraping application. Scraping data for personal use poses practically no problem. However, if the acquired data is published again, then it is crucial to consider which type of data is processed. Internationally recognized court trials have helped define what’s acceptable for scraping websites. These trials indicate that if copied data are facts, the data can be repurposed. However, data that is original, for example, ideas, news, and opinions, cannot be used because many times the information is copyrighted. Given that the application scrapes factual information, we can establish a case for the scraping, aggregation, and republishing of this data.</p>
+<h3>Comparison with the Literature</h3>
+<p>To compare the proposed methodology of this project, a review of similar studies was conducted. For example, in 2021, Lan and colleagues created an accessible toolkit that can automatically scan, scrape, collect, unify, and save the data from COVID-19 data sources from different countries across the world. They also used Python as a programming language and well-known packages like Beau-tifulSoup, Selenium, and Pandas for the collection and processing of the data. In a single run, the application will gather information from all over the world. The information is then consolidated in a single database for sharing after post-processing and data cleansing. The COVID-Scraper also provides a visualization feature to make the whole data available for viewing as a web service. Additionally, the data can be downloaded as a PDF. The tool developed in this study also features the ability to process PDFs, images, and dynamically generated websites.</p>
+<p>Another interesting study used Python with libraries like Scrapy, which is focused on the development of web crawlers, to scrape big scholarly databases like PubMed and arXiv. The process involved first searching for COVID-19-related papers in a variety of databases and then collecting the metadata of the search results with web scraping techniques. The acquired metadata was then processed with the Pandas library, which included cleaning and normalizing the data, and then merged into a single dataset in the form of a CSV file. The resulting dataset features over 40,000 records of metadata related to COVID-19 research. The intended usage of the aggregated dataset is to detect possible trends, gaps, or other interesting facts about COVID-19 research in general. The study also used version control systems for the Python code.</p>
+<p>By comparing the developed web application with other approaches from the literature, we can establish a case for using the proposed techniques and technology but also derive ideas for improving the application further. For example, a limitation of the application in its current form is that dynamically generated websites cannot be scraped because a library like Selenium is needed. Selenium thereby simulates a browser that can execute JavaScript that gathers information from the server by asynchronous requests. This reveals data that stays hidden when using libraries like Requests. Additionally, the application can be further improved by allowing for file-based scraping. Given that a lot of data sources publish their information as PDFs or CSV files, this can further broaden the range of data that can be processed by the application.</p>
+<h2>Conclusion</h2>
+<p>The ever-increasing amount of information available on the internet and the scale of that information’s development over time leads to search queries that produce vague and unspecific results. However, by making use of information extraction methods, we can diminish the reach of this issue and focus useful information on a single platform. Billions of people worldwide have been affected by the outbreak of the coronavirus. Organizations, governments, and researchers are working diligently to research the issue of COVID-19 and achieve the goal of returning civilians to their natural way of living as soon as possible.</p>
+<p>Researchers around the world have used comprehensive COVID-19 records to provide information that contributed to the progress of COVID-19 research. In order to efficiently obtain, compile, preserve, and exchange data that is open to the public, we have implemented an online application that scrapes selected COVID-19 metrics from the aforementioned three websites. It is useful for residents of the DACH area to witness the progression of COVID-19 over time. Under the proposed parameters, the CoronaScraper is a highly adaptable and automated tool that facilitates research and provides targeted information to the public. As always the code is available on <a href="https://github.com/marco507/CoronaTracker/">GitHub</a>.</p>
+<div id="sp_easy_accordion-1689243202"><div id="sp-ea-367" class="sp-ea-one sp-easy-accordion" data-ex-icon="fa-minus" data-col-icon="fa-plus" data-ea-active="ea-click" data-ea-mode="vertical" data-preloader="" data-scroll-active-item="" data-offset-to-scroll="0"><div class="ea-card  sp-ea-single">
+<h3 class="ea-header"><a class="collapsed" data-sptoggle="spcollapse" data-sptarget="#collapse3670" href="javascript:void(0)" aria-expanded="false"><i class="ea-expand-icon fa fa-plus"></i> Reference</a></h3>
+<div class="sp-collapse spcollapse spcollapse" id="collapse3670" data-parent="#sp-ea-367"><div class="ea-body">
+<p>Al Walid, M. H. (2019). Data analysis and visualization of continental cancer situation by twitter scraping. International Journal of Modern Education and Computer Science, 11(7), 23–31.</p>
+<p>Chandra, R. V. (2015). Python requests essentials. Birmingham: Packt Publishing. Collete, A. (2013). Python and hdf5: Unlocking scientific data. Sebastopol: O’Reilly.</p>
+<p>Comba, J. L. D. (2020). Data visualization for the understanding of covid-19. Computing in Science &amp; Engineering, 22(6), 81–86.</p>
+<p>Deepak, K. M., &amp; Lisha, S. (2016). A dive into web scraper world. 2016 3rd International Conference on Computing for Sustainable Global Development , 689–693.</p>
+<p>Dongthi, T., Nguyen, Kieuthi, Chung, T., &amp; Dong Thi Thao, N. (2020). New trends in technology application in education and capacities of universities lecturers during the covid-19 pandemic. nter-national Journal of Mechanical and Production Engineering Research and Development (10), 1709–1714.</p>
+<p>Hajba, G. L. (2018). Website scraping with python: Using beautifulsoup and scrapy. Berkeley: Apress L. P.</p>
+<p>Harris, J. K., Mansour, R., Choucair, B., Olson, J., Nissen, C., &amp; Bhatt, J. (2014). Health department use of social media to identify foodborne illness - chicago, illinois, 2013-2014. Morbidity and Mortality Weekly Report , 63(32), 681–685.</p>
+<p>Ihm, H., Jang, K., Lee, K., Jang, G., Seo, M.-G., Han, K., &amp; Myaeng, S.-H. (2017). Multi-source food hazard event extraction for public health. In 2017 ieee international conference on big data and smart computing (pp. 414–417).</p>
+<p>Kenneth, R. (2022). Requests: Http for humans. Retrieved from https://requests.readthedocs.io/en/latest/</p>
+<p>La, V.-P., Pham, T.-H., Ho, M.-T., Nguyen, M.-H., P. Nguyen, K.-L., Vuong, T.-T., . . . Vuong, Q.-H. (2020). Policy response, social media and science journalism for the sustainability of the public health system amid the covid-19 outbreak: The vietnam lessons. Sustainability , 12(7), 2931.</p>
+<p>Lan, H., Sha, D., Malarvizhi, A. S., Liu, Y., Li, Y., Meister, N., . . . Yang, C. P. (2021). Covid-scraper: An open-source toolset for automatically scraping and processing global multi scale spatiotemporal covid-19 records. Ieee Access, 9, 84783–84798.</p>
+<p>Lawson, R. (2015). Web scraping with python: Scrape data from any website with the power of python. Birmingham: Packt Publishing.</p>
+<p>Majumder, M. S., Santillana, M., Mekaru, S. R., McGinnis, D. P., Khan, K., &amp; Brownstein, J. S. (2016). Utilizing nontraditional data sources for near real-time estimation of transmission dynamics during the 2015-2016 colombian zika virus disease outbreak. JMIR public health and surveillance, 2(1), e30.</p>
+<p>McKinney, W. (2018). Python for data analysis: Data wrangling with pandas, numpy, and ipython (2nd ed.). Sebastopol: O’Reilly.</p>
+<p>Mitchell, R. (2015). Web scraping with python: Collecting data from the modern web (1st ed.). Sebastopol: O’Reilly.</p>
+<p>Pandas. (2022). Input/output — pandas documentation. Retrieved from https://pandas.pydata.org/pandas-docs/dev/reference/io.html#hdfstore-pytables-hdf5</p>
+<p>Pollett, S., Althouse, B. M., Forshey, B., Rutherford, G. W., &amp; Jarman, R. G. (2017). Internet-based biosurveillance methods for vector-borne diseases: Are they novel public health tools or just novelties? PLoS Neglected Tropical Diseases, 11(11), e0005871.</p>
+<p>Richardson, L. (2021). Beautiful soup documentation. Retrieved from https://beautiful-soup-4.readthedocs.io/en/latest/S. D. S, S. (2015). A comparative study on web scraping. In Proceedings of 8th international research conference.</p>
+<p>Santos, B. S., Silva, I., Da Ribeiro-Dantas, M. C., Alves, G., Endo, P. T., &amp; Lima, L. (2020). Covid-19: A scholarly production dataset report for research analysis. Data in brief , 32, 106178.</p>
+<p>Shakra, M., Rabia, Z., Sharaz, A., &amp; Sohail Masood, B. (2019). Exploiting filtering approach with web scrapping for smart online shopping : Penny wise: A wise tool for online shopping. 2019 2nd International Conference on Computing, Mathematics and Engineering Technologies, 1–5.</p>
+<p>The HDF Group. (2022). Hdf5. Retrieved from https://portal.hdfgroup.org/display/HDF5/ HDF5 The Octoparse Team. (2022). 9 industries benefiting from web scraper octoparse. Retrieved from https://www.octoparse.com/blog/9-industries-benefit-from-web-scraper-octoparse</p>
+<p>Upadhyay, S., Pant, V., Bhasin, S., &amp; Pattanshetti, M. K. (2017). Articulating the construction of a web scraper for massive data extraction. In Proceedings of the 2017 second ieee international conference on electrical, computer and communication technologies (pp. 1–4).</p>
+<p>vanden Broucke, S. (2018). Practical web scraping for data science: Best practices and examples with python. New York: Apress.</p>
+<p>Xu, Q., Shen, Z., Shah, N., Cuomo, R., Cai, M., Brown, M., . . . Mackey, T. (2020). Characterizing weibo social media posts from wuhan, china during the early stages of the covid-19 pandemic: Qualitative content analysis. JMIR public health and surveillance, 6(4), e24125.</p>
+</div></div>
+</div></div></div>
+	
+</div>
+<!-- .entry-content -->
+
+
+</article>
+
+	<nav class="navigation post-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links">
+<div class="nav-previous"><a href="https://marco507.github.io/scrum-for-a-software-development-project/" rel="prev"><span class="nav-link-text">Previous Post</span><h3 class="entry-title">Scrum for a Software Development Project</h3></a></div>
+<div class="nav-next"><a href="https://marco507.github.io/analysis-of-a-customer-complaint-dataset/" rel="next"><span class="nav-link-text">Next Post</span><h3 class="entry-title">Analysis of a Customer Complaint Dataset</h3></a></div>
+</div>
+	</nav>
+		</main><!-- #main -->
+
+		
+	<section id="secondary" class="sidebar widget-area" role="complementary">
+
+		<div id="block-2" class="widget widget_block widget_search"><form role="search" method="get" action="https://bigdatatime.eu/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search">
+<label class="wp-block-search__label" for="wp-block-search__input-1">Search</label><div class="wp-block-search__inside-wrapper ">
+<input class="wp-block-search__input" id="wp-block-search__input-1" placeholder="" value="" type="search" name="s" required><button aria-label="Search" class="wp-block-search__button wp-element-button" type="submit">Search</button>
+</div>
+</form></div>
+<div id="block-3" class="widget widget_block"><div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
+<h2 class="wp-block-heading">Recent Posts</h2>
+<ul class="wp-block-latest-posts__list wp-block-latest-posts">
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/why-are-financial-time-series-called-random-walks/">Why Are Financial Time Series Called Random Walks?</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/building-a-private-ai-tutor-for-a-microsoft-learn-course/">Building a Private AI Tutor for a Microsoft Learn Course</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/discovering-in-demand-skills-and-salary-ranges-in-austrias-data-science-job-market/">Discovering In-Demand Skills in Austria&#8217;s Data Science Job Market</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/statistical-hypothesis-testing-with-parametric-tests/">Statistical Hypothesis Testing with Parametric Tests</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/pdf-summarization-and-flashcard-generation-with-chatgpt/">PDF Summarization and Flashcard Generation with ChatGPT</a></li>
+</ul>
+</div></div></div>
+<div id="block-6" class="widget widget_block"><div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
+<h2 class="wp-block-heading">Categories</h2>
+<ul class="wp-block-categories-list wp-block-categories">	<li class="cat-item cat-item-6">
+<a href="https://marco507.github.io/category/app-development/">App Development</a>
+</li>
+	<li class="cat-item cat-item-9">
+<a href="https://marco507.github.io/category/business-intelligence/">Business Intelligence</a>
+</li>
+	<li class="cat-item cat-item-10">
+<a href="https://marco507.github.io/category/data-science/">Data Science</a>
+</li>
+	<li class="cat-item cat-item-7">
+<a href="https://marco507.github.io/category/machine-learning/">Machine Learning</a>
+</li>
+	<li class="cat-item cat-item-8">
+<a href="https://marco507.github.io/category/nlp/">NLP</a>
+</li>
+	<li class="cat-item cat-item-1">
+<a href="https://marco507.github.io/category/python/">Python</a>
+</li>
+	<li class="cat-item cat-item-5">
+<a href="https://marco507.github.io/category/sql/">SQL</a>
+</li>
+	<li class="cat-item cat-item-11">
+<a href="https://marco507.github.io/category/statistics/">Statistics</a>
+</li>
+</ul>
+</div></div></div>
+<div id="block-16" class="widget widget_block">
+<div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
+<h2 class="wp-block-heading">Author</h2>
+
+
+
+<ul>
+<li><a href="https://marco507.github.io/author/marco-schweiss">Marco Schweiss</a></li>
+</ul>
+</div></div>
+</div>
+	</section><!-- #secondary -->
+
+	
+	</div>
+<!-- #content -->
+
+	
+	<div class="footer-wrap">
+
+		
+		<footer id="colophon" class="site-footer">
+
+						
+	<div id="footer-line" class="site-info">
+
+				
+			<span class="footer-text">
+				Copyright © All rights reserved 
+			</span>
+
+					
+	</div>
+
+	
+		</footer><!-- #colophon -->
+
+	</div>
+
+	
+</div>
+<!-- #page -->
+
+<a rel="nofollow" style="display:none" href="https://marco507.github.io/?blackhole=10c5072c0b" title="Do NOT follow this link or you will be banned from the site!">BigDataTime</a>
+
+<!-- Consent Management powered by Complianz | GDPR/CCPA Cookie Consent https://wordpress.org/plugins/complianz-gdpr -->
+<div id="cmplz-cookiebanner-container">
+<div class="cmplz-cookiebanner cmplz-hidden banner-1 optin cmplz-bottom-right cmplz-categories-type-view-preferences" aria-modal="true" data-nosnippet="true" role="dialog" aria-live="polite" aria-labelledby="cmplz-header-1-optin" aria-describedby="cmplz-message-1-optin">
+	<div class="cmplz-header">
+		<div class="cmplz-logo"></div>
+		<div class="cmplz-title" id="cmplz-header-1-optin">Manage Cookie Consent</div>
+		<div class="cmplz-close" tabindex="0" role="button" aria-label="close-dialog">
+			<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+		</div>
+	</div>
+
+	<div class="cmplz-divider cmplz-divider-header"></div>
+	<div class="cmplz-body">
+		<div class="cmplz-message" id="cmplz-message-1-optin">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may adversely affect certain features and functions.</div>
+		<!-- categories start -->
+		<div class="cmplz-categories">
+			<details class="cmplz-category cmplz-functional">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Functional</span>
+							<span class="cmplz-always-active">
+								<span class="cmplz-banner-checkbox">
+									<input type="checkbox" id="cmplz-functional-optin" data-category="cmplz_functional" class="cmplz-consent-checkbox cmplz-functional" size="40" value="1">
+									<label class="cmplz-label" for="cmplz-functional-optin" tabindex="0"><span class="screen-reader-text">Functional</span></label>
+								</span>
+								Always active							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-functional">The technical storage or access is strictly necessary for the legitimate purpose of enabling the use of a specific service explicitly requested by the subscriber or user, or for the sole purpose of carrying out the transmission of a communication over an electronic communications network.</span>
+				</div>
+			</details>
+
+			<details class="cmplz-category cmplz-preferences">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Preferences</span>
+							<span class="cmplz-banner-checkbox">
+								<input type="checkbox" id="cmplz-preferences-optin" data-category="cmplz_preferences" class="cmplz-consent-checkbox cmplz-preferences" size="40" value="1">
+								<label class="cmplz-label" for="cmplz-preferences-optin" tabindex="0"><span class="screen-reader-text">Preferences</span></label>
+							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-preferences">The technical storage or access is necessary for the legitimate purpose of storing preferences that are not requested by the subscriber or user.</span>
+				</div>
+			</details>
+
+			<details class="cmplz-category cmplz-statistics">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Statistics</span>
+							<span class="cmplz-banner-checkbox">
+								<input type="checkbox" id="cmplz-statistics-optin" data-category="cmplz_statistics" class="cmplz-consent-checkbox cmplz-statistics" size="40" value="1">
+								<label class="cmplz-label" for="cmplz-statistics-optin" tabindex="0"><span class="screen-reader-text">Statistics</span></label>
+							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-statistics">The technical storage or access that is used exclusively for statistical purposes.</span>
+					<span class="cmplz-description-statistics-anonymous">The technical storage or access that is used exclusively for anonymous statistical purposes. Without a subpoena, voluntary compliance on the part of your Internet Service Provider, or additional records from a third party, information stored or retrieved for this purpose alone cannot usually be used to identify you.</span>
+				</div>
+			</details>
+			<details class="cmplz-category cmplz-marketing">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Marketing</span>
+							<span class="cmplz-banner-checkbox">
+								<input type="checkbox" id="cmplz-marketing-optin" data-category="cmplz_marketing" class="cmplz-consent-checkbox cmplz-marketing" size="40" value="1">
+								<label class="cmplz-label" for="cmplz-marketing-optin" tabindex="0"><span class="screen-reader-text">Marketing</span></label>
+							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-marketing">The technical storage or access is required to create user profiles to send advertising, or to track the user on a website or across several websites for similar marketing purposes.</span>
+				</div>
+			</details>
+		</div>
+<!-- categories end -->
+			</div>
+
+	<div class="cmplz-links cmplz-information">
+		<a class="cmplz-link cmplz-manage-options cookie-statement" href="#" data-relative_url="#cmplz-manage-consent-container">Manage options</a>
+		<a class="cmplz-link cmplz-manage-third-parties cookie-statement" href="#" data-relative_url="#cmplz-cookies-overview">Manage services</a>
+		<a class="cmplz-link cmplz-manage-vendors tcf cookie-statement" href="#" data-relative_url="#cmplz-tcf-wrapper">Manage {vendor_count} vendors</a>
+		<a class="cmplz-link cmplz-external cmplz-read-more-purposes tcf" target="_blank" rel="noopener noreferrer nofollow" href="https://cookiedatabase.org/tcf/purposes/">Read more about these purposes</a>
+			</div>
+
+	<div class="cmplz-divider cmplz-footer"></div>
+
+	<div class="cmplz-buttons">
+		<button class="cmplz-btn cmplz-accept">Accept</button>
+		<button class="cmplz-btn cmplz-deny">Deny</button>
+		<button class="cmplz-btn cmplz-view-preferences">View preferences</button>
+		<button class="cmplz-btn cmplz-save-preferences">Save preferences</button>
+		<a class="cmplz-btn cmplz-manage-options tcf cookie-statement" href="#" data-relative_url="#cmplz-manage-consent-container">View preferences</a>
+			</div>
+
+	<div class="cmplz-links cmplz-documents">
+		<a class="cmplz-link cookie-statement" href="#" data-relative_url="">{title}</a>
+		<a class="cmplz-link privacy-statement" href="#" data-relative_url="">{title}</a>
+		<a class="cmplz-link impressum" href="#" data-relative_url="">{title}</a>
+			</div>
+
+</div>
+</div>
+					<div id="cmplz-manage-consent" data-nosnippet="true">
+<button class="cmplz-btn cmplz-hidden cmplz-manage-consent manage-consent-1">Manage consent</button>
+
+</div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js?ver=bb270fba1988038f5680f75b7475565e" id="mathjax-js"></script>
+<script type="text/javascript" id="occasio-navigation-js-extra">
+/* <![CDATA[ */
+var occasioScreenReaderText = {"expand":"Expand child menu","collapse":"Collapse child menu","icon":"<svg class=\"icon icon-expand\" aria-hidden=\"true\" role=\"img\"> <use xlink:href=\"https:\/\/marco507.github.io\/wp-content\/themes\/occasio\/assets\/icons\/genericons-neue.svg#expand\"><\/use> <\/svg>"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://marco507.github.io/wp-content/themes/occasio/assets/js/navigation.min.js?ver=20220224" id="occasio-navigation-js"></script>
+<script type="text/javascript" id="cmplz-cookiebanner-js-extra">
+/* <![CDATA[ */
+var complianz = {"prefix":"cmplz_","user_banner_id":"1","set_cookies":[],"block_ajax_content":"","banner_version":"12","version":"6.5.5","store_consent":"","do_not_track_enabled":"","consenttype":"optin","region":"eu","geoip":"","dismiss_timeout":"","disable_cookiebanner":"","soft_cookiewall":"","dismiss_on_scroll":"","cookie_expiry":"365","url":"https:\/\/marco507.github.io\/wp-json\/complianz\/v1\/","locale":"lang=en&locale=en_US","set_cookies_on_root":"","cookie_domain":"","current_policy_id":"16","cookie_path":"\/","categories":{"statistics":"statistics","marketing":"marketing"},"tcf_active":"","placeholdertext":"Click to accept {category} cookies and enable this content","aria_label":"Click to accept {category} cookies and enable this content","css_file":"https:\/\/marco507.github.io\/wp-content\/uploads\/complianz\/css\/banner-{banner_id}-{type}.css?v=12","page_links":{"eu":{"cookie-statement":{"title":"Cookie Policy","url":"https:\/\/marco507.github.io\/cookie-policy-eu\/"},"privacy-statement":{"title":"Privacy Policy","url":"https:\/\/marco507.github.io\/privacy-policy\/"},"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"us":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"uk":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"ca":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"au":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"za":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"br":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}}},"tm_categories":"","forceEnableStats":"","preview":"","clean_cookies":""};
+/* ]]> */
+</script>
+<script defer type="text/javascript" src="https://marco507.github.io/wp-content/plugins/complianz-gdpr/cookiebanner/js/complianz.min.js?ver=6.5.5" id="cmplz-cookiebanner-js"></script>
+<script type="text/javascript" src="https://marco507.github.io/wp-content/plugins/easy-accordion-free/public/assets/js/collapse.min.js?ver=2.2.5" id="sp-ea-accordion-js-js"></script>
+<script type="text/javascript" src="https://marco507.github.io/wp-content/plugins/easy-accordion-free/public/assets/js/script.js?ver=2.2.5" id="sp-ea-accordion-config-js"></script>
+
+</body>
+</html>

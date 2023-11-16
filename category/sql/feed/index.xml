@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>SQL &#8211; BigDataTime</title>
+	<atom:link href="https://marco507.github.io/category/sql/feed/" rel="self" type="application/rss+xml" />
+	<link>https://marco507.github.io/</link>
+	<description>Programming, AI and Data Science</description>
+	<lastBuildDate>Mon, 10 Jul 2023 08:17:40 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+
+<image>
+	<url>https://marco507.github.io/wp-content/uploads/2023/07/cropped-bigdatatime-favicon-3-32x32.png</url>
+	<title>SQL &#8211; BigDataTime</title>
+	<link>https://marco507.github.io/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Creating an Airbnb-like Data Mart</title>
+		<link>https://marco507.github.io/creating-an-airbnb-like-data-mart/</link>
+		
+		<dc:creator><![CDATA[Marco Schweiss]]></dc:creator>
+		<pubDate>Mon, 10 Jul 2023 08:17:40 +0000</pubDate>
+				<category><![CDATA[App Development]]></category>
+		<category><![CDATA[SQL]]></category>
+		<guid isPermaLink="false">https://marco507.github.io/?p=214</guid>
+
+					<description><![CDATA[Airbnb was founded in October 2007, stemming from personal experiences of encountering overpriced shared apartments and fully booked hotels during a crowded conference in San [...]]]></description>
+										<content:encoded><![CDATA[<p>Airbnb was founded in October 2007, stemming from personal experiences of encountering overpriced shared apartments and fully booked hotels during a crowded conference in San Francisco. The original name, Airbedandbreakfast, was later shortened to Airbnb in 2009. Serving as an online platform, Airbnb facilitates the connection between hosts and guests and assumes responsibility for managing the booking process.</p>
+<p>Transactions are conducted through the platform, with guests making payments for their bookings using credit cards. To ensure that the accommodation matches its description on the platform, hosts receive payment 24 hours after the guest&#8217;s arrival. In 2013, Airbnb generated revenue by charging a commission of 6-12% from guests, and 3% from hosts, and amassed a total of $150 million from approximately 10 million overnight stays.</p>
+<p>Every user, whether a host or a guest, creates a profile page on Airbnb. Hosts are required to upload at least one photo and provide a phone number, while guests need to provide more comprehensive information. Hosts have the option to describe their accommodations using text and photos. Both guests and hosts can rate each other based on their experiences. The platform also features a calculator function that allows users to estimate their expected income from their own accommodations.</p>
+<p>A friend of mine asked me to create a proof-of-concept for the Airbnb use case in the form of a data mart. Given that this was a good opportunity to improve my SQL skills I agreed to the development and the following list of requirements:</p>
+<ul>
+<li><strong>Entity Relationship Model (ERM):</strong> Development of an ERM that encompasses the definition of data tables, attributes, and relationships among entities pertaining to the Airbnb use case.</li>
+<li><strong>Database Management System (DBMS): </strong>Selection of a suitable Database Management System (DBMS), such as MySQL or any other SQL-based system, to implement the database for handling Airbnb-related information.</li>
+<li><strong>Database Structure: </strong>Establishment of an appropriate database structure that facilitates efficient storage and processing of data relevant to the Airbnb use case.</li>
+<li><strong>Dummy Data:</strong> Generation of realistic dummy data to populate the database, ensuring that it accurately reflects the various scenarios and characteristics encountered in real-world Airbnb situations.</li>
+<li><strong>Query Functionality:</strong> Creation of well-crafted queries that enable seamless retrieval and presentation of data, effectively showcasing the functionalities of the database.</li>
+<li><strong>Documentation:</strong> Thorough documentation of all implementation steps, including the development of the ERM, database structure, and SQL statements employed, ensuring comprehensive records of the entire process.</li>
+<li><strong>Data Storage Optimization:</strong> Implementation of data storage optimization techniques, including proper normalization of the database structure, to minimize redundancy and optimize data storage for essential information.</li>
+</ul>
+<p>In the following sections, we will take a look at how the project was conceptualized and developed.</p>
+<h2>Conception</h2>
+<p>The first step of the project was to derive an appropriate database design. The database design process includes a crucial stage called database modeling, which holds the utmost significance in the overall database design. Any oversights or omissions during this step can have a detrimental impact on the implementation stage, potentially rendering the database useless.</p>
+<p>To initiate the process, the first step involves crafting a comprehensive requirements specification for the Airbnb project. This specification document should encompass a thorough requirements analysis, delving into the following aspects in greater detail:</p>
+<ul>
+<li>Identification of various roles or user groups involved in the system.</li>
+<li>Specification of the actions or activities performed by each of these roles.</li>
+<li>Determination of the necessary data and functions required to fulfill the system&#8217;s requirements.</li>
+</ul>
+<p>The resulting document can be seen below:</p>
+<a href="https://marco507.github.io/wp-content/uploads/2023/07/data-mart_concept.pdf" class="pdfemb-viewer" style="" data-width="max" data-height="max"  data-toolbar="bottom" data-toolbar-fixed="off">data-mart_concept<br/></a>
+<h2>Development</h2>
+<p>The next step was to implement the data mart. Throughout this phase, I ensured that all SQL statements were meticulously documented in my database file.</p>
+<p>Specifically, I delivered the tables and relations for the database in a SQL data file, aligning them with the concepts outlined in the ER-Diagram. Additionally, I diligently documented every SQL statement involved in the creation process.</p>
+<p>To ensure a comprehensive test of the system, I made certain that each table contained a minimum of 20 entries. Furthermore, I created at least one test case for the database, specifically designed to validate its functionality based on the ER-Model.</p>
+<p>By adhering to the provided guidelines and ensuring the documentation and testing of the system a first working version of the data mart was derived. A detailed explanation of the database design and implementation procedure can be seen in the PDF below:</p>
+<a href="https://marco507.github.io/wp-content/uploads/2023/07/data-mart_development.pdf" class="pdfemb-viewer" style="" data-width="max" data-height="max"  data-toolbar="bottom" data-toolbar-fixed="off">data-mart_development<br/></a>
+<h2>Finalization</h2>
+<p>In this final phase, the goal was to polish and refine the database management system, after having received feedback. Given that only a minor change to the schema of the database was necessary and the first iteration of the data mart was up to standard, this last phase was rather short. The following document sums up the project and shows the changes to the database schema:</p>
+<a href="https://marco507.github.io/wp-content/uploads/2023/07/data-mart_finalization.pdf" class="pdfemb-viewer" style="" data-width="max" data-height="max"  data-toolbar="bottom" data-toolbar-fixed="off">data-mart_finalization<br/></a>
+<h2>Conclusion</h2>
+<p>As for my last application, this project was a great opportunity to gain development experience and also to make a deep dive into pure SQL. I really like the final version of the data mart and especially the location search functionality. The code for the data mart and instructions on how to use it can be found in this <a href="https://github.com/marco507/Airbnb-Data-Mart">GitHub repository</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

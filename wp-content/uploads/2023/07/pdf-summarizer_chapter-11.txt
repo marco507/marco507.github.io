@@ -1,0 +1,57 @@
+3.3 Position-wise Feed-Forward Networks 
+
+- Flashcard
+- Q: What additional component do each layer in the encoder and decoder of the system contain?
+- A: Each layer contains a fully connected feed-forward network.
+
+- Flashcard
+- Q: How is the feed-forward network applied in each position?
+- A: The feed-forward network is applied to each position separately and identically.
+
+- Flashcard
+- Q: What does the feed-forward network consist of?
+- A: The feed-forward network consists of two linear transformations with a ReLU activation in between.
+
+- Flashcard
+- Q: How can the feed-forward network be represented mathematically?
+- A: The feed-forward network can be represented by the equation: $\operatorname{FFN}(x)=\max \left(0, x W_{1}+b_{1}\right) W_{2}+b_{2}$.
+
+- Flashcard
+- Q: What does the equation represent?
+- A: The equation represents the feed-forward network function $\operatorname{FFN}(x)$.
+
+- Flashcard
+- Q: How many linear transformations does the equation consist of?
+- A: The equation consists of two linear transformations. 
+
+- Flashcard
+- Q: What is the first linear transformation in the equation?
+- A: The first linear transformation is given by: $x W_{1}+b_{1}$.
+
+- Flashcard
+- Q: What activation function is applied element-wise to the output of the first linear transformation?
+- A: The ReLU activation function $\max(0, \cdot)$ is applied element-wise to the output of the first linear transformation.
+
+- Flashcard
+- Q: What is the second linear transformation in the equation?
+- A: The second linear transformation is given by: output of ReLU activation function $\times W_{2}+b_{2}$.
+
+- Flashcard
+- Q: Do linear transformations across different positions use the same or different parameters?
+- A: Different parameters are used from layer to layer.
+
+- Flashcard
+- Q: What does it mean when each layer in the encoder and decoder has its own set of parameters for the feed-forward network?
+- A: It means that each layer has its unique set of parameters, separate from other layers in the encoder and decoder.
+
+- Flashcard
+- Q: How can the feed-forward network be described in terms of convolutions?
+- A: Another way of describing the feed-forward network is as two convolutions with kernel size 1.
+
+- Flashcard
+- Q: What is the dimensionality of the input and output of the feed-forward network?
+- A: The dimensionality of the input and output of the feed-forward network is $d_{\text{model}} = 512$.
+
+- Flashcard
+- Q: What is the dimensionality of the inner-layer of the feed-forward network?
+- A: The inner-layer of the feed-forward network has dimensionality $d_{\text{ff}} = 2048$.

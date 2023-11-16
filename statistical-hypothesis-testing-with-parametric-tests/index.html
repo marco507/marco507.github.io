@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+
+<title>Statistical Hypothesis Testing with Parametric Tests &#8211; BigDataTime</title>
+<meta name="robots" content="max-image-preview:large">
+
+<script>MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']], 
+    processEscapes: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore|editor-rich-text'
+  }
+};</script>
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+<link rel="alternate" type="application/rss+xml" title="BigDataTime &raquo; Feed" href="https://marco507.github.io/feed/">
+<link rel="alternate" type="application/rss+xml" title="BigDataTime &raquo; Comments Feed" href="https://marco507.github.io/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="BigDataTime &raquo; Statistical Hypothesis Testing with Parametric Tests Comments Feed" href="https://marco507.github.io/statistical-hypothesis-testing-with-parametric-tests/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/marco507.github.io\/wp-includes\/js\/wp-emoji-release.min.js?ver=bb270fba1988038f5680f75b7475565e"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"🏳️‍⚧️","🏳️​⚧️")?!1:!n(e,"🇺🇳","🇺​🇳")&&!n(e,"🏴󠁧󠁢󠁥󠁮󠁧󠁿","🏴​󠁧​󠁢​󠁥​󠁮​󠁧​󠁿");case"emoji":return!n(e,"🫱🏻‍🫲🏿","🫱🏻​🫲🏿")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<link rel="stylesheet" id="occasio-theme-fonts-css" href="https://marco507.github.io/wp-content/fonts/aa39170267083d285467854f55bbd6ba.css?ver=20201110" type="text/css" media="all">
+<style id="wp-emoji-styles-inline-css" type="text/css">img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}</style>
+<link rel="stylesheet" id="wp-block-library-css" href="https://marco507.github.io/wp-includes/css/dist/block-library/style.min.css?ver=bb270fba1988038f5680f75b7475565e" type="text/css" media="all">
+<style id="classic-theme-styles-inline-css" type="text/css">/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}</style>
+<style id="global-styles-inline-css" type="text/css">body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--primary: #2a4861;--wp--preset--color--secondary: #5d7b94;--wp--preset--color--tertiary: #90aec7;--wp--preset--color--accent: #60945d;--wp--preset--color--highlight: #915d94;--wp--preset--color--light-gray: #ededef;--wp--preset--color--gray: #84848f;--wp--preset--color--dark-gray: #24242f;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 16px;--wp--preset--font-size--medium: 24px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--extra-large: 48px;--wp--preset--font-size--huge: 64px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}</style>
+<link rel="stylesheet" id="sp-ea-font-awesome-css" href="https://marco507.github.io/wp-content/plugins/easy-accordion-free/public/assets/css/font-awesome.min.css?ver=2.2.5" type="text/css" media="all">
+<link rel="stylesheet" id="sp-ea-style-css" href="https://marco507.github.io/wp-content/plugins/easy-accordion-free/public/assets/css/ea-style.css?ver=2.2.5" type="text/css" media="all">
+<style id="sp-ea-style-inline-css" type="text/css">#sp-ea-675 .spcollapsing { height: 0; overflow: hidden; transition-property: height;transition-duration: 300ms;}#sp-ea-675.sp-easy-accordion>.sp-ea-single {border: 1px solid #e2e2e2; }#sp-ea-675.sp-easy-accordion>.sp-ea-single>.ea-header a {color: #444;}#sp-ea-675.sp-easy-accordion>.sp-ea-single>.sp-collapse>.ea-body {background: #fff; color: #444;}#sp-ea-675.sp-easy-accordion>.sp-ea-single {background: #eee;}#sp-ea-675.sp-easy-accordion>.sp-ea-single>.ea-header a .ea-expand-icon.fa { float: left; color: #444;font-size: 16px;}</style>
+<link rel="stylesheet" id="eeb-css-frontend-css" href="https://marco507.github.io/wp-content/plugins/email-encoder-bundle/core/includes/assets/css/style.css?ver=231115-134229" type="text/css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="https://marco507.github.io/wp-includes/css/dashicons.min.css?ver=bb270fba1988038f5680f75b7475565e" type="text/css" media="all">
+<link rel="stylesheet" id="cmplz-general-css" href="https://marco507.github.io/wp-content/plugins/complianz-gdpr/assets/css/cookieblocker.min.css?ver=6.5.5" type="text/css" media="all">
+<link rel="stylesheet" id="occasio-stylesheet-css" href="https://marco507.github.io/wp-content/themes/occasio/style.css?ver=1.1.2" type="text/css" media="all">
+<script type="text/javascript" src="https://marco507.github.io/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://marco507.github.io/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="https://marco507.github.io/wp-content/plugins/email-encoder-bundle/core/includes/assets/js/custom.js?ver=231115-134229" id="eeb-js-frontend-js"></script>
+<script type="text/javascript" src="https://marco507.github.io/wp-content/themes/occasio/assets/js/svgxuse.min.js?ver=1.2.6" id="svgxuse-js"></script>
+<link rel="https://api.w.org/" href="https://marco507.github.io/wp-json/">
+<link rel="alternate" type="application/json" href="https://marco507.github.io/wp-json/wp/v2/posts/640">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://marco507.github.io/xmlrpc.php?rsd">
+<link rel="canonical" href="https://marco507.github.io/statistical-hypothesis-testing-with-parametric-tests/">
+<style>.cmplz-hidden{display:none!important;}</style>
+<link rel="icon" href="https://marco507.github.io/wp-content/uploads/2023/07/cropped-bigdatatime-favicon-3-32x32.png" sizes="32x32">
+<link rel="icon" href="https://marco507.github.io/wp-content/uploads/2023/07/cropped-bigdatatime-favicon-3-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://marco507.github.io/wp-content/uploads/2023/07/cropped-bigdatatime-favicon-3-180x180.png">
+<meta name="msapplication-TileImage" content="https://marco507.github.io/wp-content/uploads/2023/07/cropped-bigdatatime-favicon-3-270x270.png">
+<style id="wpforms-css-vars-root">:root {
+					--wpforms-field-border-radius: 3px;
+--wpforms-field-background-color: #ffffff;
+--wpforms-field-border-color: rgba( 0, 0, 0, 0.25 );
+--wpforms-field-text-color: rgba( 0, 0, 0, 0.7 );
+--wpforms-label-color: rgba( 0, 0, 0, 0.85 );
+--wpforms-label-sublabel-color: rgba( 0, 0, 0, 0.55 );
+--wpforms-label-error-color: #d63637;
+--wpforms-button-border-radius: 3px;
+--wpforms-button-background-color: #066aab;
+--wpforms-button-text-color: #ffffff;
+--wpforms-field-size-input-height: 43px;
+--wpforms-field-size-input-spacing: 15px;
+--wpforms-field-size-font-size: 16px;
+--wpforms-field-size-line-height: 19px;
+--wpforms-field-size-padding-h: 14px;
+--wpforms-field-size-checkbox-size: 16px;
+--wpforms-field-size-sublabel-spacing: 5px;
+--wpforms-field-size-icon-size: 1;
+--wpforms-label-size-font-size: 16px;
+--wpforms-label-size-line-height: 19px;
+--wpforms-label-size-sublabel-font-size: 14px;
+--wpforms-label-size-sublabel-line-height: 17px;
+--wpforms-button-size-font-size: 17px;
+--wpforms-button-size-height: 41px;
+--wpforms-button-size-padding-h: 15px;
+--wpforms-button-size-margin-top: 10px;
+
+				}</style>
+</head>
+
+<body data-rsssl="1" class="post-template-default single single-post postid-640 single-format-standard wp-embed-responsive centered-theme-layout has-sidebar is-blog-page">
+
+	
+	<div id="page" class="site">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		
+		<header id="masthead" class="site-header" role="banner">
+
+			<div class="header-main">
+
+				
+				
+<div class="site-branding">
+
+	
+			<p class="site-title"><a href="https://marco507.github.io/" rel="home">BigDataTime</a></p>
+
+			
+			<p class="site-description">Programming, AI and Data Science</p>
+
+			
+</div>
+<!-- .site-branding -->
+
+				
+
+	<button class="primary-menu-toggle menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+		<svg class="icon icon-menu" aria-hidden="true" role="img"> <use xlink:href="https://bigdatatime.eu/wp-content/themes/occasio/assets/icons/genericons-neue.svg#menu"></use> </svg><svg class="icon icon-close" aria-hidden="true" role="img"> <use xlink:href="https://bigdatatime.eu/wp-content/themes/occasio/assets/icons/genericons-neue.svg#close"></use> </svg>		<span class="menu-toggle-text">Menu</span>
+	</button>
+
+	<div class="primary-navigation">
+
+		<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+
+			<ul id="primary-menu" class="menu">
+<li id="menu-item-113" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-113"><a href="https://marco507.github.io/about/">About</a></li>
+<li id="menu-item-618" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-618"><a rel="privacy-policy" href="https://marco507.github.io/privacy-policy/">Privacy Policy</a></li>
+<li id="menu-item-619" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-619"><a href="https://marco507.github.io/cookie-policy-eu/">Cookie Policy</a></li>
+<li id="menu-item-620" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-620"><a href="https://marco507.github.io/imprint/">Imprint</a></li>
+</ul>		</nav><!-- #site-navigation -->
+
+	</div>
+<!-- .primary-navigation -->
+
+
+
+			</div>
+<!-- .header-main -->
+
+		</header><!-- #masthead -->
+
+		
+		
+		<div id="content" class="site-content">
+
+			<main id="main" class="site-main" role="main">
+
+				
+				
+<article id="post-640" class="post-640 post type-post status-publish format-standard has-post-thumbnail hentry category-statistics">
+
+	
+			<figure class="post-image post-image-single">
+				<img width="800" height="440" src="https://marco507.github.io/wp-content/uploads/2023/11/statistical-testing_cover-image-800x440.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" decoding="async" fetchpriority="high">			</figure>
+
+			
+	<header class="post-header entry-header">
+
+		<h1 class="post-title entry-title">Statistical Hypothesis Testing with Parametric Tests</h1>
+		<div class="entry-meta">
+<div class="entry-categories"> <ul class="post-categories">
+	<li><a href="https://marco507.github.io/category/statistics/" rel="category tag">Statistics</a></li>
+</ul>
+</div>
+<span class="posted-on"><a href="https://marco507.github.io/statistical-hypothesis-testing-with-parametric-tests/" rel="bookmark"><time class="entry-date published" datetime="2023-10-18T14:09:27+02:00">18. October 2023</time><time class="updated" datetime="2023-11-16T14:24:20+01:00">16. November 2023</time></a></span><span class="posted-by"> <span class="author vcard"><a class="url fn n" href="https://marco507.github.io/author/marco-schweiss/" title="View all posts by Marco Schweiss" rel="author">Marco Schweiss</a></span></span>
+</div>
+		
+	</header><!-- .entry-header -->
+
+	
+<div class="entry-content">
+
+	<p>Many scientific fields require methods for making statistical inferences with the data that was generated during reserach. A cornerstone of statistical inference is hypothesis testing, which is a method used in many research scenarios. In this article, we will look into the key elements and the general procedure to conduct a hypothesis test according to modern standards. Additionally, we will examine two selected hypothesis testing methods in detail and.</p>
+<h2>The Hypothesis Testing Framework</h2>
+<p>The field of statistics can be separated into two general paradigms regarding their applications. First, there are descriptive statistics, which are applied to summarize or describe features of obtained data. On the contrary, there are inferential statistics for drawing conclusions about a population with the help of data obtained from samples. Many issues occurring in inferential statistics can be classified into one of three categories, estimation, confidence sets, or hypothesis testing. The latter of the three categories, hypothesis testing, has a broad range of applications and is used in practically all scientific fields.</p>
+<p>Before we look at the hypothesis testing procedure, the meaning of hypothesis testing and the general approach must be defined. As already explained, hypothesis testing is a method of statistical inference, with the approach to hypothesis testing varying if we look at different paradigms of statistical inference. The article is focused on the null hypothesis significance testing framework, which resulted from combining the work of Fisher and Pearson- Neyman into a single approach. Going forward, when the term hypothesis testing is mentioned, it is in the context of the null hypothesis significance testing framework.</p>
+<h3>Null Hypothesis and Alternative Hypothesis</h3>
+<p>The process of hypothesis testing is, at its core, a decision problem and very similar to the scientific method in general. The decision is between two hypotheses that make assumptions about the parameters of a population. First, there is the null hypothesis, which is denoted by \(H_{0}\). The null hypothesis is assumed to be true until it is proven false. On the other hand, there is the alternative hypothesis, denoted by \(H_{1}\). The alternative hypothesis is declared true if the null hypothesis is disproven. Given that researchers often use hypothesis testing to prove an effect of some sort, most of the time, the null hypothesis claims that there is no effect. In contrast, the alternative hypothesis claims that an effect exists.</p>
+<p>So in summary, first the status quo is observed, followed by the setting up of a theory, which is then tested and compared against the test results. After the evaluation of the test results, the hypothesis is then rejected or further examined.</p>
+<h3>Parametric and Non-Parametric Tests</h3>
+<p>After defining the null and alternative hypotheses, we can further specify the hypothesis testing framework. It is crucial to make a distinction between the two types of hypothesis testing. The first type of test is the parametric test, which is based on the assumption that the population from which the sample data for the test is drawn follows a particular distribution with corresponding parameters. Most of the time, there is an assumption of a normal distribution. Contrary to parametric tests, non-parametric tests are conducted without making any assumptions about the population’s distribution. The type of test to conduct must be chosen according to the tested hypothesis and the available sample data. Going forward, we will focus on parametric hypothesis tests.</p>
+<h3>Test Statistics</h3>
+<p>To conduct a hypothesis test, a test statistic is necessary. The test statistic acts as the foundation on which the decision to reject the null hypothesis is made. A test statistic is thus a function used to evaluate the sample data. The resulting value of the test statistic is a single number representing all the sample data. There are various hypothesis tests, with each test employing its own specific test statistic, for example, the t-test uses the t-statistic, while the chi-squared test uses the chi-squared statistic. Like the choice of test type in general, the selection of a specific test statistic depends on the nature of the research question and the type of data being analyzed.</p>
+<h3>Significance Level</h3>
+<p>The next necessity for a successful hypothesis test are the rules for interpreting the values derived from the test statistic. To identify when a null hypothesis has to be rejected, a significance level must be determined. The significance level denoted by \(\alpha\) is thereby the limit of how unlikely a computed value of a test statistic must be before the null hypothesis is rejected. The significance level also defines a range of resulting test statistic values, which leads to a rejection of the null hypothesis. This range of values is called the rejection region. The value for the significance level must be defined before conducting a hypothesis test and can be chosen arbitrarily, although the value should not be greater than 10 percent.</p>
+<h3>Population and Sample Distribution</h3>
+<p>Like already mentioned, most parametric tests assume a normally distributed population. If the population distribution is normal, then the sample data’s distribution is also normal. Additionally, suppose the population is assumed to be non-normally distributed. According to the central limit theorem, the sampling distribution can nonetheless be assumed to be normal for a sufficiently large sample size. In this case, the sampling distribution approaches a normal distribution when the sample size increases. If not stated otherwise for a specific testing method, a sample size of 30 is large enough to assume the sampling distribution is approximately normal.</p>
+<h3>Two-Sided and One-Sided Hypothesis Tests</h3>
+<p>After looking into the sample distribution’s necessary criteria, we can now further define the types of hypothesis tests. First, we denote \(\theta\) as a population parameter and \(\theta_{0}\) as a known value. Following, we denote the null hypothesis as \(H_{0}:\theta = \theta_{0}\). The first type of test is called a two-tailed test, with \(H_{1}:\theta \neq \theta_{0}\) as the alternative hypothesis. For the second type of hypothesis test, we have the one-tailed test with either \(H_{1}:\theta &gt; \theta_{0}\) or \(H_{1}:\theta &lt; \theta_{0}\) as alternative hypotheses.</p>
+<p>The hypothesis tests are thereby called tailed tests because the rejection region is located in the tail regions of the sampling distribution curve. Resulting from their respective hypothesis definitions, the two-tailed test has a rejection region in both tails each, and the one-tailed test has a rejection region in either the left tail or the right tail. Consequently, we speak of a left-tailed test or a right-tailed test.</p>
+<h3>Testing Considerations</h3>
+<p>As already explained, the type of hypothesis test is dependent on the hypothesis, and the proposed hypothesis depends on the research scenario. In a scientific setting, it is often sufficient to determine if there is any effect at all. Consequently, the two-tailed test is the most prominently used test because positive and negative effects can be tested. The consensus is to use a two-tailed test if there is no reason to use a one-tailed test. Although the one-tailed test can outperform a two-tailed test, it should only be chosen for proving an effect that can exclusively be positive or negative.</p>
+<p>Additionally, there is the possibility that the research only cares about either a positive or negative effect. From an ethical standpoint, like for the significance value, it is essential to choose which kind of test to take before the sample data is inspected because the rejection region’s location can influence if a null hypothesis is rejected.</p>
+<h2>Interpretation of Testing Results</h2>
+<p>Considering all the previous points, we now have all the essential elements of a statistical hypothesis test. Given that the population can be assumed to be normally distributed or the central limit theorem can be employed, a hypothesis test’s overall process is as follows: The first step is to define the two hypotheses H0 and H1 according to the research question, which results in a two-tailed or one-tailed test. Second, a significance level is chosen, and the rejection region’s location concerning the test tails is determined. Following, the result is computed with the sample data and the test statistic. The next step after obtaining our computed value is the correct interpretation of the results. From this point on, there are two general possibilities for interpretation. First, the critical-value approach and second, test interpretation with a p-value.</p>
+<h3>Critical-Value Approach</h3>
+<p>For the critical-value approach, we interpret the computed value with the help of a table. The computed value is thereby compared to the table’s values, resulting in a decision to reject or fail to reject the null hypothesis. Which table to choose depends on the distribution of the respective hypothesis test, for example, the normal distribution table, the t-distribution table, or the F-distribution table. How to correctly interpret the test results with the respective table depends on the employed hypothesis testing method and the structure of the table itself.</p>
+<h3>The p-Value</h3>
+<p>The second method for interpreting test results is the p-value approach. The p-value, also called the attained significance level, is used to express exactly how strong or weak the rejection of the null hypothesis is. It is the probability of observing the test statistic’s calculated value under the assumption that the null hypothesis is true. A smaller p-value indicates strong evidence, and a bigger p-value indicates weak evidence against the null hypothesis.</p>
+<p>The p-value is thereby obtained from the computed value of the test statistic. It can either be calculated with statistical software or chosen from a table. With the acquired p-value, decisions regarding the rejection of the null hypothesis can be made by comparing it to the desired significance level. If the obtained p-value is smaller than the predefined significance level, the null hypothesis is rejected.</p>
+<h4>Criticism of the p-Value Approach</h4>
+<p>I already mentioned that the null hypothesis significance testing framework combines two different paradigms into a single framework. In particular, the p-value approach combines the usage of a null and alternative hypothesis, which stems from Pearson and Neyman and the concept of the p-value from Fisher, into a single procedure. The controversy around this combination stems from the fact that the original concept of Fisher’s p-value was only a probability of observing an outcome as weird as the hypothesis test&#8217;s outcome.</p>
+<p>There was also no prerequisite to interpret the p-value under the assumption that the null hypothesis is true because there was no second hypothesis in Fisher’s testing procedure. According to various sources, although the combination of the two paradigms is the most practiced form of hypothesis testing in current scientific research, the p-value is also one of the most misinterpreted and controversial concepts.</p>
+<h2>t-Test for Two Dependent Samples</h2>
+<p>The first of the two hypothesis tests examined in detail is the t-test for two dependent samples, which is also called the paired t-test. The characteristic of dependent samples is that every sample has a dependent second sample, and vice versa. The test is based on the t-distribution and examines the hypothesis that two dependent samplings represent two populations with different means.</p>
+<p>An example of a paired t-test would be to test random samples of people, administer a treatment, and then perform another test. For this example, the t-test evaluates if the difference between the two sampling means is statistically significant, or, in other words, if the treatment had an effect.</p>
+<h3>Prerequisites and Assumptions</h3>
+<p>First of all, a paired t-test is conducted with interval/ratio data. Interval/ratio data has the important characteristic that it can be processed mathematically. Examples of interval or ratio data are population size, age, median income, or average times. Another prerequisite is that the samples are selected randomly and that the population from which the sampling is drawn follows a normal distribution. If the population distribution is unknown, the sampling should have a size of at least 30 to assume a normal distribution according to the central limit theorem.</p>
+<p>Another critical assumption for the paired t-test is that both samplings&#8217; population variances are equal. This characteristic, called homogeneity of variance, is essential with regard to the accuracy of the paired t-test. The homogeneity of variance is also a critical prerequisite to guaranteeing the reliability of other parametric tests and can be evaluated with various tests, for example, Cochran’s G test.</p>
+<h3>Testing Procedure</h3>
+<p>To start the paired t-test, like in every other hypothesis test, the null hypothesis \(H_{0}\) and the alternative hypothesis \(H_{1}\) must be defined correctly. As already explained, a hypothesis test can be one-tailed or two-tailed, depending on the established hypotheses. Given that the paired t-test is concerned with means, the null hypothesis is denoted as \(H_{0}: \mu_{1} = \mu_{2}\). For a two-tailed test, we have \(H_{1}: \mu_{1} \neq \mu_{2}\) and for a one-tailed test, we have \(H_{1}: \mu_{1} &gt; \mu_{2}\) or \(H_{1}: \mu_{1} &lt; \mu_{2}\) as alternative hypotheses. After defining the hypotheses, the significance level must be chosen. As already explained, for ethical reasons, this must happen before the sample data is inspected.</p>
+<p>For computing the actual values of the test, the direct-difference method is employed. For our test data, given that we have \(n\) different test subjects, we get \(2*n\) different data entries in our sample data. The \(2*n\) data entries of the sample data are split into two dependent datasets, \(X_{1}\) and \(X_{2}\), representing, for example, a pre-test score and a post-test score of the \(n\) subjects. Additionally, each of the two dependent data points in \(X_{1}\) and \(X_{2}\) yields a difference \(D\) by subtracting \(X_{2}\) from \(X_{1}\).</p>
+<p>Following, we sum all the differences \(D\) to \(\Sigma D\) and additionally the sum of the squares of all differences to \(\Sigma D^{2}\). The next step is to calculate the mean of the differences \(\bar{D}\) and the estimated population standard deviation of the differences \(\tilde{s}_{D}\) with</p>
+<p>\[\bar{D}=\frac{\Sigma D}{n} \quad \quad \tilde{s}_{D}=\sqrt{\frac{\Sigma D^{2}-\frac{(\Sigma D)^{2}}{n}}{n-1}}\]</p>
+<p>With the help of \(\tilde{s}_{D}\), the standard error of the mean difference \(s_{\bar{D}}\) can be calculated, which in turn is used to compute the t-value with the test statistic for the paired t-test and \(\bar{D}\)</p>
+<p>\[s_{\bar{D}}=\frac{\tilde{s}_{D}}{\sqrt{n}} \quad \quad t=\frac{\bar{D}}{s_{\bar{D}}}\]</p>
+<h3>Test Intepretation</h3>
+<p>From this point on, there are two possible methods for interpreting the results of the test. The first method is the critical value approach, where the computed value \(t\) is compared to the table of Student&#8217;s t distribution, which can be found <a href="https://marco507.github.io/wp-content/uploads/2023/11/statistical-testing_t-table.pdf" target="_blank" rel="noopener">here</a>. To correctly use the table, we need an additional parameter, the degrees of freedom, which is calculated with the formula \(df = n-1\), with \(n\) being the number of test subjects.</p>
+<p>To evaluate the computed value with the help of the table, we first search for the row corresponding to the degrees of freedom. The column is then chosen according to the type of test (one- or two-tailed) and the significance level. The resulting cross-section is the value against which our computed value is compared. Depending on our hypothesis, there are three possible conclusions, for \(H_{0}: \mu_{1} = \mu_{2}\) the null hypothesis is rejected if the computed absolute value is equal or greater than the resulting table value; for \(H_{1}: \mu_{1} &gt; \mu_{2}\) the null hypothesis is rejected when the computed value is positive and equal or greater than the table value; and for \(H_{1}: \mu_{1} &lt; \mu_{2}\) the null hypothesis is rejected if the computed value is negative and the computed absolute value is equal or greater than the table value.</p>
+<p>For the p-value approach, we choose the p-value from the t-table. First, we search for the row corresponding to the degrees of freedom for our test. Then there are two possibilities for choosing the p-value. First, if the test&#8217;s computed value is equal to the table value, depending on whether the test is one-tailed or two-tailed, the corresponding significance level is chosen from one of the first two rows on the table. Alternatively, suppose we cannot find the exact t-value in the table. In that case, the p-value can be chosen by locating the nearest bigger and smaller table values for the computed critical value and their significance levels and approximately locating the p-value between the two obtained significance levels. The resulting p-value is then compared against the significance level \(\alpha\) chosen at the beginning of the test, and if the p-value is smaller than \(\alpha\), the null hypothesis is rejected.</p>
+<h2>Single-Factor Within Subjects ANOVA</h2>
+<p>The second of the presented hypothesis testing methods is called the single-factor within-subjects analysis of variance, which is, going forward, abbreviated to SFWS-ANOVA. The SFWS-ANOVA, like the paired t-test, works on dependent samples and population means, but in contrast to the t-test, the SFWS-ANOVA can evaluate more than only two dependent samplings. In essence, the SFWS-ANOVA is used to test the hypothesis that in a set of \(k\) dependent samples with \(k \geq 2\) at least two samplings represent populations with different means.</p>
+<p>If the test result is statistically significant, it can be concluded that at least two of the \(k\) samples belong to populations with different means. The computation of the SFWS-ANOVA’s test statistic is based on the F-distribution. An example of a SFWS-ANOVA test scenario would be a study about different treatments where the same \(n\) subjects get \(k\) different treatments, which are then compared.</p>
+<h3>Prerequisites and Assumptions</h3>
+<p>Like the paired t-test, the SFWS-ANOVA is conducted with interval/ratio data. Additionally, it is assumed that the population follows a normal distribution and that the samples are chosen randomly. The last prerequisite is called the sphericity assumption and is the SFWS-ANOVA’s equivalent to the paired t-test’s homogeneity of variance assumption. The sphericity assumption can be evaluated with Mauchly’s sphericity test. It is important to note that if the number of samples \(k\) equals two, the paired t-test and the SFWS-ANOVA yield the same results, therefore going forward, we assume that the SFWS-ANOVA is only employed for \(k \geq 3\).</p>
+<h3>Testing Procedure</h3>
+<p>As always, the test starts with the definition of \(H_{0}\) and \(H_{1}\). The null hypothesis is thereby defined as \(H_{0}: \mu_{1} = \mu_{2} = \mu_{3}\), under the prerequisite that \(k = 3\). For different \(k\) the null hypothesis must be altered accordingly. The alternative hypothesis is defined as \(H_{1}\) Not \(H_{0}\), which means that at least two of the \(k\) population means differ from each other. This notation is used because \(H_{1}: \mu_{1} \neq \mu_{2} \neq \mu_{3}\) would imply that all three means must differ from each other. Now, before inspecting the sample data, like for every hypothesis test, a significance level must be determined.</p>
+<p>For the actual test data, given that we have $n$ subjects and $k$ samplings, we get $n*k$ dependent samples, which are split into $X_{1},&#8230;,X_{k}$ different datasets. Thereby, each $X_{k}$ represents the sample data of one of the $k$ samplings. To further process the data, for each of the subjects $k$ samplings, the sum of the scores $\Sigma S$ is calculated. In addition $\Sigma X_{T}$, which is the sum of all the $n*k$ sample scores and $\Sigma X^{2}_{T}$, which is the sum of all squared scores is computed. Going forward, the total sum of squares $S S_{T}$ and the between-conditions sum of squares $S S_{B C}$ are calculated with</p>
+<p>\[S S_{T}=\Sigma X_{T}^{2}-\frac{\left(\Sigma X_{T}\right)^{2}}{n*k} \quad S S_{B C}=\sum_{j=1}^{k}\left[\frac{\left(\Sigma X_{j}\right)^{2}}{n}\right]-\frac{\left(\Sigma X_{T}\right)^{2}}{n*k}\]</p>
+<p>with $\Sigma X_{j}$ denoting the sum of the $n$ samples in the $j^{th}$ sampling. With the next equation the between-subjects sum of squares $S S_{B S}$ is calculated</p>
+<p>\[S S_{B S}=\sum_{i=1}^{n}\left[\frac{\left(\Sigma S_{i}\right)^{2}}{k}\right]-\frac{\left(\Sigma X_{T}\right)^{2}}{n*k}\]</p>
+<p>The residual sum of squares $S S_{\mathrm{res}}$ is calculated with the help of the previous three parameters, therefore $S S_{\mathrm{res}}=S S_{T}-S S_{B C}-S S_{B S}$. Additionally the between-conditions degrees of freedom $d f_{B C}$ is calculated with $d f_{B C}=k-1$ and the residual degrees of freedom $d f_{\mathrm{res}}$ with $d f_{\mathrm{res}}=(n-1)(k-1)$. With these parameters we compute the mean square between-conditions $M S_{B C}$ and the mean square residual $M S_{\mathrm{res}}$</p>
+<p>\[M S_{B C}=\frac{S S_{B C}}{d f_{B C}} \quad M S_{\mathrm{res}}=\frac{S S_{\mathrm{res}}}{d f_{\mathrm{res}}}\]</p>
+<p>The last step is to calculate the F-ratio, which is the test statistic for the SFWS-ANOVA.</p>
+<p>\[F=\frac{M S_{B C}}{M S_{\mathrm{res}}}\]</p>
+<h3>Test Interpretation</h3>
+<p>Like for the paired t-test, there is the possibility to interpret the computed value with the critical-value approach or to obtain the p-value either from a table or with computation and compare it against the chosen significance level. For the critical-value approach, the computed value is compared to one of the F-distribution tables, which can be found <a href="https://marco507.github.io/wp-content/uploads/2023/11/statistical-testing_F-tables.pdf" target="_blank" rel="noopener">here</a>. The tables are used by selecting the right table corresponding to the chosen significance level and then searching for the value in the cross-section of the calculated degrees of freedom.</p>
+<p>For the SFWS-ANOVA, the column in the F-table, which is called the degree of freedom for the numerator, corresponds to $df_{BC}$ and the row, called the degree of freedom for the denominator, corresponds to $d f_{\mathrm{res}}$. If the computed value is equal to or greater than the table critical value, the null hypothesis is rejected, and there is the conclusion that there are at least two populations with significantly different means. It is important to note that the linked F-tables are only supposed to be used for evaluating a non-directional alternative hypothesis.</p>
+<p>To obtain the p-value, we search for the computed value independent of the table&#8217;s specified significance level. Like for the critical value, the correct row and column correspond to the numerator and denominator. If the computed value is identical to one of the table’s values, the p-value is equal to this specific table’s significance level. If the computed value is not in the table, like for the paired t-test, we choose the nearest smaller and bigger values across the tables. The actual p-value then lies between the two significance levels of the table with the next smaller value and the table with the next bigger value. Alternatively, the exact p-value can be calculated with the help of statistical software. If the obtained p-value is smaller than the predefined significance level, the null hypothesis is rejected.</p>
+<h2>Experiment &#8211; Blood Pressure Treatment</h2>
+<p>For better comprehension, we will now look at a practical application in the form of a fictive testing scenario for a blood pressure medication. To test if the medication has any effect at all, a paired t-test on 10 subjects is employed.</p>
+<h3>Hypotheses and Significance Level</h3>
+<p>Like for every hypothesis test, first the hypotheses and the significance level are defined. For the null hypothesis, I choose $H_{0} : \mu_{1} = \mu_{2}$ and for the alternative hypothesis, $H_{1} : \mu_{1} \neq \mu_{2}$, which in turn results in a two-tailed test. The significance level is chosen as $\alpha = 0.05$.</p>
+<h3>Sampling and Sample Preparation</h3>
+<p>To generate the sample data, we use the Numpy library for Python, with the sample data consisting of 2 x 10 samples randomly drawn from two different normal populations. The first sample set was generated with a mean of $\mu = 140$ and a standard deviation $\sigma=5$ and the second sampling with $\mu=135$ and $\sigma=5$ to simulate a reduction of the mean systolic blood pressure of the subjects.</p>
+<p>With this, the conditions for a normally distributed population and randomly selected samples are fulfilled. Additionally, given that $\sigma_{1} = \sigma_{2}$ and in turn $\sigma^{2}_{1} = \sigma^{2}_{2}$, the condition for homogeneity of variance is also fulfilled. Additionally the values for the differences $D$ and $D^{2}$ and the sums of the differences $\Sigma D$ and $\Sigma D^{2}$ were computed from the generated sample data. The following table features the sample data and the respective parameters.</p>
+<p><img decoding="async" class="size-full wp-image-669 aligncenter" src="https://marco507.github.io/wp-content/uploads/2023/11/hypothesis-testing_test-data.jpg" alt="" width="386" height="383" srcset="https://marco507.github.io/wp-content/uploads/2023/11/hypothesis-testing_test-data.jpg 386w, https://marco507.github.io/wp-content/uploads/2023/11/hypothesis-testing_test-data-300x298.jpg 300w, https://marco507.github.io/wp-content/uploads/2023/11/hypothesis-testing_test-data-150x150.jpg 150w" sizes="(max-width: 386px) 100vw, 386px"></p>
+<h3>Computation of the Test Statistic</h3>
+<p>Going forward the mean of the differences $\bar{D}$ is calculated with</p>
+<p>\[\bar{D}=\frac{\Sigma D}{n} = \frac{45}{10} = 4.5\]</p>
+<p>and the estimated population standard deviation of the differences $\tilde{s}_{D}$ with</p>
+<p>\[\tilde{s}_{D}=\sqrt{\frac{\Sigma D^{2}-\frac{(\Sigma D)^{2}}{n}}{n-1}} = \sqrt{\frac{487 -\frac{(45)^{2}}{10}}{10-1}} \approx 5.62\]</p>
+<p>Following the standard error of the mean difference $s_{\bar{D}}$ is computed with</p>
+<p>\[s_{\bar{D}}=\frac{\tilde{s}_{D}}{\sqrt{n}} = \frac{5.62}{\sqrt{10}} \approx 1.78\]</p>
+<p>and finally with the test statistic of the paired t-test</p>
+<p>\[t=\frac{\bar{D}}{s_{\bar{D}}} = \frac{4.5}{1.78} \approx 2.53\]</p>
+<h3>Interpretation of the Result</h3>
+<p>With the computed t-value and the degrees of freedom $df = n-1 = 9$, the critical value in the t-table can be selected. The corresponding table value for the computed t-value and the $9$ degrees of freedom would be nearly in the middle of the table values $2.262$ and $2.821$, which correspond to the significance levels $0.02$ to $0.05$ for the two-tailed test. Given that the computed critical value is smaller than the table value for $\alpha = 0.05$, the test yielded enough evidence to reject the null hypothesis. Alternatively, if the test is interpreted with the p-value approach, given that the computed t-value is nearly between $0.05$ and $0.02$, the estimated p-value would be $0.035$.</p>
+<p>With $0.035 &lt; 0.05$, the null hypothesis can also be rejected, and according to the alternative hypothesis, the two samplings represent two populations with different means, or in the context of the experiment scenario, the medication had an effect on the systolic blood pressure.</p>
+<h2>Conclusion</h2>
+<p>The establishment of a scientific framework for hypothesis testing has been an ongoing concern throughout the history of the statistical evaluation of sample data. Starting with the historical controversies around the creators of the different testing frameworks to the critique against the seemingly random combination of the hypothesis testing paradigm of Pearson-Neymann with Fisher&#8217;s p-value and the resulting misinterpretations of test results. Nonetheless, hypothesis testing is an invaluable statistical tool in many scientific disciplines, especially the life sciences, and continues to be a cornerstone of modern research.</p>
+<div id="sp_easy_accordion-1700140339"><div id="sp-ea-675" class="sp-ea-one sp-easy-accordion" data-ex-icon="fa-minus" data-col-icon="fa-plus" data-ea-active="ea-click" data-ea-mode="vertical" data-preloader="" data-scroll-active-item="" data-offset-to-scroll="0"><div class="ea-card  sp-ea-single">
+<h3 class="ea-header"><a class="collapsed" data-sptoggle="spcollapse" data-sptarget="#collapse6750" href="javascript:void(0)" aria-expanded="false"><i class="ea-expand-icon fa fa-plus"></i> References</a></h3>
+<div class="sp-collapse spcollapse spcollapse" id="collapse6750" data-parent="#sp-ea-675"><div class="ea-body">
+<p>Boos, D. D., &amp; Stefanski, L. A. (2011). P-value precision and reproducibility. The American Statistician, 65(4), 213–221.</p>
+<p>Christensen, R. (2005). Testing fisher, neyman, pearson, and bayes. The American Statistician, 59(2), 121–126.</p>
+<p>Frost, J. (2020). Hypothesis testing: An intuitive guide for making data driven decisions. John Wiley &amp; Sons.</p>
+<p>Goodman, S. (2008). A dirty dozen: twelve p-value misconceptions. In Seminars in hematology (Vol. 45, pp. 135–140).</p>
+<p>Halsey, L. G., Curran-Everett, D., Vowler, S. L., &amp; Drummond, G. B. (2015). The fickle p value generates irreproducible results. Nature methods, 12(3), 179–185.</p>
+<p>Kraemer, H. C. (2019). Is it time to ban the p value? Jama Psychiatry, 76(12), 1219–1220.</p>
+<p>Lane, D. M. (2020). Within-subjects anova. Retrieved from http://onlinestatbook.com/2/ analysis of variance/within-subjects.html</p>
+<p>Lillestøl, J. (2014). Statistical inference : Paradigms and controversies in historic perspective. Retrieved from https://www.nhh.no/globalassets/departments/business-and -management-science/research/lillestol/statistical inference.pdf</p>
+<p>Mann, P. S., &amp; Lacke, C. J. (2010). Introductory statistics (7th ed.). Hoboken, NJ: John Wiley &amp; Sons.</p>
+<p>Mauchly, J. W. (1940). Significance test for sphericity of a normal n-variate distribution. The Annals of Mathematical Statistics, 11(2), 204–209.</p>
+<p>Murphy, K. R., &amp; Myors, B. (2004). Statistical power analysis: A simple and general model for traditional and modern hypothesis tests (2nd ed.).  Mahwah, NJ: Erlbaum.</p>
+<p>Rice, J. A. (2007). Mathematical statistics and data analysis (3rd ed.). Belmont, Calif.: Thomson/ Brooks/Cole.</p>
+<p>Roussas, G. G. (2003). Introduction to probablility and statistical inference. Amsterdam and Boston: Academic Press.</p>
+<p>Sheskin, D. J. (2003). Handbook of parametric and nonparametric statistical procedures. Chapman and Hall/CRC.</p>
+<p>Spickard, J. V. (2016). Research basics: Design to data analysis in six steps. Sage Publications.</p>
+<p>Wackerly, D. D., Mendenhall, W., &amp; Scheaffer, R. L. (2008). Mathematical statistics with applications (7th ed.). Belmont, CA: Thomson Higher Education.</p>
+<p>Wasserman, L. (2004). All of statistics: A concise course in statistical inference. New York, NY: Springer.</p>
+<p>Witte, R. S., &amp; Witte, J. S. (2017). Statistics (11th ed.). Hoboken, NJ: John Wiley &amp; Sons Inc.</p>
+<p>Young, G. A., &amp; Smith, R. L. (2005). Essentials of statistical inference (Vol. 16). Cambridge: Cam- 22 bridge University Press. Zhang, S. (1998). Fourteen homogeneity of variance tests: When and how to use them. Retrieved from https://files.eric.ed.gov/fulltext/ED422392.pdf 23</p>
+</div></div>
+</div></div></div>
+	
+</div>
+<!-- .entry-content -->
+
+
+</article>
+
+	<nav class="navigation post-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links">
+<div class="nav-previous"><a href="https://marco507.github.io/pdf-summarization-and-flashcard-generation-with-chatgpt/" rel="prev"><span class="nav-link-text">Previous Post</span><h3 class="entry-title">PDF Summarization and Flashcard Generation with ChatGPT</h3></a></div>
+<div class="nav-next"><a href="https://marco507.github.io/discovering-in-demand-skills-and-salary-ranges-in-austrias-data-science-job-market/" rel="next"><span class="nav-link-text">Next Post</span><h3 class="entry-title">Discovering In-Demand Skills in Austria&#8217;s Data Science Job Market</h3></a></div>
+</div>
+	</nav>
+		</main><!-- #main -->
+
+		
+	<section id="secondary" class="sidebar widget-area" role="complementary">
+
+		<div id="block-2" class="widget widget_block widget_search"><form role="search" method="get" action="https://bigdatatime.eu/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search">
+<label class="wp-block-search__label" for="wp-block-search__input-1">Search</label><div class="wp-block-search__inside-wrapper ">
+<input class="wp-block-search__input" id="wp-block-search__input-1" placeholder="" value="" type="search" name="s" required><button aria-label="Search" class="wp-block-search__button wp-element-button" type="submit">Search</button>
+</div>
+</form></div>
+<div id="block-3" class="widget widget_block"><div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
+<h2 class="wp-block-heading">Recent Posts</h2>
+<ul class="wp-block-latest-posts__list wp-block-latest-posts">
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/why-are-financial-time-series-called-random-walks/">Why Are Financial Time Series Called Random Walks?</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/building-a-private-ai-tutor-for-a-microsoft-learn-course/">Building a Private AI Tutor for a Microsoft Learn Course</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/discovering-in-demand-skills-and-salary-ranges-in-austrias-data-science-job-market/">Discovering In-Demand Skills in Austria&#8217;s Data Science Job Market</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/statistical-hypothesis-testing-with-parametric-tests/">Statistical Hypothesis Testing with Parametric Tests</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/pdf-summarization-and-flashcard-generation-with-chatgpt/">PDF Summarization and Flashcard Generation with ChatGPT</a></li>
+</ul>
+</div></div></div>
+<div id="block-6" class="widget widget_block"><div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
+<h2 class="wp-block-heading">Categories</h2>
+<ul class="wp-block-categories-list wp-block-categories">	<li class="cat-item cat-item-6">
+<a href="https://marco507.github.io/category/app-development/">App Development</a>
+</li>
+	<li class="cat-item cat-item-9">
+<a href="https://marco507.github.io/category/business-intelligence/">Business Intelligence</a>
+</li>
+	<li class="cat-item cat-item-10">
+<a href="https://marco507.github.io/category/data-science/">Data Science</a>
+</li>
+	<li class="cat-item cat-item-7">
+<a href="https://marco507.github.io/category/machine-learning/">Machine Learning</a>
+</li>
+	<li class="cat-item cat-item-8">
+<a href="https://marco507.github.io/category/nlp/">NLP</a>
+</li>
+	<li class="cat-item cat-item-1">
+<a href="https://marco507.github.io/category/python/">Python</a>
+</li>
+	<li class="cat-item cat-item-5">
+<a href="https://marco507.github.io/category/sql/">SQL</a>
+</li>
+	<li class="cat-item cat-item-11">
+<a href="https://marco507.github.io/category/statistics/">Statistics</a>
+</li>
+</ul>
+</div></div></div>
+<div id="block-16" class="widget widget_block">
+<div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
+<h2 class="wp-block-heading">Author</h2>
+
+
+
+<ul>
+<li><a href="https://marco507.github.io/author/marco-schweiss">Marco Schweiss</a></li>
+</ul>
+</div></div>
+</div>
+	</section><!-- #secondary -->
+
+	
+	</div>
+<!-- #content -->
+
+	
+	<div class="footer-wrap">
+
+		
+		<footer id="colophon" class="site-footer">
+
+						
+	<div id="footer-line" class="site-info">
+
+				
+			<span class="footer-text">
+				Copyright © All rights reserved 
+			</span>
+
+					
+	</div>
+
+	
+		</footer><!-- #colophon -->
+
+	</div>
+
+	
+</div>
+<!-- #page -->
+
+<a rel="nofollow" style="display:none" href="https://marco507.github.io/?blackhole=10c5072c0b" title="Do NOT follow this link or you will be banned from the site!">BigDataTime</a>
+
+<!-- Consent Management powered by Complianz | GDPR/CCPA Cookie Consent https://wordpress.org/plugins/complianz-gdpr -->
+<div id="cmplz-cookiebanner-container">
+<div class="cmplz-cookiebanner cmplz-hidden banner-1 optin cmplz-bottom-right cmplz-categories-type-view-preferences" aria-modal="true" data-nosnippet="true" role="dialog" aria-live="polite" aria-labelledby="cmplz-header-1-optin" aria-describedby="cmplz-message-1-optin">
+	<div class="cmplz-header">
+		<div class="cmplz-logo"></div>
+		<div class="cmplz-title" id="cmplz-header-1-optin">Manage Cookie Consent</div>
+		<div class="cmplz-close" tabindex="0" role="button" aria-label="close-dialog">
+			<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+		</div>
+	</div>
+
+	<div class="cmplz-divider cmplz-divider-header"></div>
+	<div class="cmplz-body">
+		<div class="cmplz-message" id="cmplz-message-1-optin">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may adversely affect certain features and functions.</div>
+		<!-- categories start -->
+		<div class="cmplz-categories">
+			<details class="cmplz-category cmplz-functional">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Functional</span>
+							<span class="cmplz-always-active">
+								<span class="cmplz-banner-checkbox">
+									<input type="checkbox" id="cmplz-functional-optin" data-category="cmplz_functional" class="cmplz-consent-checkbox cmplz-functional" size="40" value="1">
+									<label class="cmplz-label" for="cmplz-functional-optin" tabindex="0"><span class="screen-reader-text">Functional</span></label>
+								</span>
+								Always active							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-functional">The technical storage or access is strictly necessary for the legitimate purpose of enabling the use of a specific service explicitly requested by the subscriber or user, or for the sole purpose of carrying out the transmission of a communication over an electronic communications network.</span>
+				</div>
+			</details>
+
+			<details class="cmplz-category cmplz-preferences">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Preferences</span>
+							<span class="cmplz-banner-checkbox">
+								<input type="checkbox" id="cmplz-preferences-optin" data-category="cmplz_preferences" class="cmplz-consent-checkbox cmplz-preferences" size="40" value="1">
+								<label class="cmplz-label" for="cmplz-preferences-optin" tabindex="0"><span class="screen-reader-text">Preferences</span></label>
+							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-preferences">The technical storage or access is necessary for the legitimate purpose of storing preferences that are not requested by the subscriber or user.</span>
+				</div>
+			</details>
+
+			<details class="cmplz-category cmplz-statistics">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Statistics</span>
+							<span class="cmplz-banner-checkbox">
+								<input type="checkbox" id="cmplz-statistics-optin" data-category="cmplz_statistics" class="cmplz-consent-checkbox cmplz-statistics" size="40" value="1">
+								<label class="cmplz-label" for="cmplz-statistics-optin" tabindex="0"><span class="screen-reader-text">Statistics</span></label>
+							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-statistics">The technical storage or access that is used exclusively for statistical purposes.</span>
+					<span class="cmplz-description-statistics-anonymous">The technical storage or access that is used exclusively for anonymous statistical purposes. Without a subpoena, voluntary compliance on the part of your Internet Service Provider, or additional records from a third party, information stored or retrieved for this purpose alone cannot usually be used to identify you.</span>
+				</div>
+			</details>
+			<details class="cmplz-category cmplz-marketing">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Marketing</span>
+							<span class="cmplz-banner-checkbox">
+								<input type="checkbox" id="cmplz-marketing-optin" data-category="cmplz_marketing" class="cmplz-consent-checkbox cmplz-marketing" size="40" value="1">
+								<label class="cmplz-label" for="cmplz-marketing-optin" tabindex="0"><span class="screen-reader-text">Marketing</span></label>
+							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-marketing">The technical storage or access is required to create user profiles to send advertising, or to track the user on a website or across several websites for similar marketing purposes.</span>
+				</div>
+			</details>
+		</div>
+<!-- categories end -->
+			</div>
+
+	<div class="cmplz-links cmplz-information">
+		<a class="cmplz-link cmplz-manage-options cookie-statement" href="#" data-relative_url="#cmplz-manage-consent-container">Manage options</a>
+		<a class="cmplz-link cmplz-manage-third-parties cookie-statement" href="#" data-relative_url="#cmplz-cookies-overview">Manage services</a>
+		<a class="cmplz-link cmplz-manage-vendors tcf cookie-statement" href="#" data-relative_url="#cmplz-tcf-wrapper">Manage {vendor_count} vendors</a>
+		<a class="cmplz-link cmplz-external cmplz-read-more-purposes tcf" target="_blank" rel="noopener noreferrer nofollow" href="https://cookiedatabase.org/tcf/purposes/">Read more about these purposes</a>
+			</div>
+
+	<div class="cmplz-divider cmplz-footer"></div>
+
+	<div class="cmplz-buttons">
+		<button class="cmplz-btn cmplz-accept">Accept</button>
+		<button class="cmplz-btn cmplz-deny">Deny</button>
+		<button class="cmplz-btn cmplz-view-preferences">View preferences</button>
+		<button class="cmplz-btn cmplz-save-preferences">Save preferences</button>
+		<a class="cmplz-btn cmplz-manage-options tcf cookie-statement" href="#" data-relative_url="#cmplz-manage-consent-container">View preferences</a>
+			</div>
+
+	<div class="cmplz-links cmplz-documents">
+		<a class="cmplz-link cookie-statement" href="#" data-relative_url="">{title}</a>
+		<a class="cmplz-link privacy-statement" href="#" data-relative_url="">{title}</a>
+		<a class="cmplz-link impressum" href="#" data-relative_url="">{title}</a>
+			</div>
+
+</div>
+</div>
+					<div id="cmplz-manage-consent" data-nosnippet="true">
+<button class="cmplz-btn cmplz-hidden cmplz-manage-consent manage-consent-1">Manage consent</button>
+
+</div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js?ver=bb270fba1988038f5680f75b7475565e" id="mathjax-js"></script>
+<script type="text/javascript" id="occasio-navigation-js-extra">
+/* <![CDATA[ */
+var occasioScreenReaderText = {"expand":"Expand child menu","collapse":"Collapse child menu","icon":"<svg class=\"icon icon-expand\" aria-hidden=\"true\" role=\"img\"> <use xlink:href=\"https:\/\/marco507.github.io\/wp-content\/themes\/occasio\/assets\/icons\/genericons-neue.svg#expand\"><\/use> <\/svg>"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://marco507.github.io/wp-content/themes/occasio/assets/js/navigation.min.js?ver=20220224" id="occasio-navigation-js"></script>
+<script type="text/javascript" id="cmplz-cookiebanner-js-extra">
+/* <![CDATA[ */
+var complianz = {"prefix":"cmplz_","user_banner_id":"1","set_cookies":[],"block_ajax_content":"","banner_version":"12","version":"6.5.5","store_consent":"","do_not_track_enabled":"","consenttype":"optin","region":"eu","geoip":"","dismiss_timeout":"","disable_cookiebanner":"","soft_cookiewall":"","dismiss_on_scroll":"","cookie_expiry":"365","url":"https:\/\/marco507.github.io\/wp-json\/complianz\/v1\/","locale":"lang=en&locale=en_US","set_cookies_on_root":"","cookie_domain":"","current_policy_id":"16","cookie_path":"\/","categories":{"statistics":"statistics","marketing":"marketing"},"tcf_active":"","placeholdertext":"Click to accept {category} cookies and enable this content","aria_label":"Click to accept {category} cookies and enable this content","css_file":"https:\/\/marco507.github.io\/wp-content\/uploads\/complianz\/css\/banner-{banner_id}-{type}.css?v=12","page_links":{"eu":{"cookie-statement":{"title":"Cookie Policy","url":"https:\/\/marco507.github.io\/cookie-policy-eu\/"},"privacy-statement":{"title":"Privacy Policy","url":"https:\/\/marco507.github.io\/privacy-policy\/"},"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"us":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"uk":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"ca":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"au":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"za":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"br":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}}},"tm_categories":"","forceEnableStats":"","preview":"","clean_cookies":""};
+/* ]]> */
+</script>
+<script defer type="text/javascript" src="https://marco507.github.io/wp-content/plugins/complianz-gdpr/cookiebanner/js/complianz.min.js?ver=6.5.5" id="cmplz-cookiebanner-js"></script>
+<script type="text/javascript" src="https://marco507.github.io/wp-content/plugins/easy-accordion-free/public/assets/js/collapse.min.js?ver=2.2.5" id="sp-ea-accordion-js-js"></script>
+<script type="text/javascript" src="https://marco507.github.io/wp-content/plugins/easy-accordion-free/public/assets/js/script.js?ver=2.2.5" id="sp-ea-accordion-config-js"></script>
+
+</body>
+</html>
