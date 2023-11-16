@@ -135,8 +135,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14
 			<ul id="primary-menu" class="menu">
 <li id="menu-item-113" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-113"><a href="https://marco507.github.io/about/">About</a></li>
 <li id="menu-item-618" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-618"><a rel="privacy-policy" href="https://marco507.github.io/privacy-policy/">Privacy Policy</a></li>
-<li id="menu-item-619" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-619"><a href="https://marco507.github.io/cookie-policy-eu/">Cookie Policy</a></li>
-<li id="menu-item-620" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-620"><a href="https://marco507.github.io/imprint/">Imprint</a></li>
+<li id="menu-item-620" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-620"><a href="https://marco507.github.io/imprint/">Legal Notice</a></li>
 </ul>		</nav><!-- #site-navigation -->
 
 	</div>
@@ -173,7 +172,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14
 	<li><a href="https://marco507.github.io/category/sql/" rel="category tag">SQL</a></li>
 </ul>
 </div>
-<span class="posted-on"><a href="https://marco507.github.io/creating-an-airbnb-like-data-mart/" rel="bookmark"><time class="entry-date published updated" datetime="2023-07-10T10:17:40+02:00">10. July 2023</time></a></span><span class="posted-by"> <span class="author vcard"><a class="url fn n" href="https://marco507.github.io/author/marco-schweiss/" title="View all posts by Marco Schweiss" rel="author">Marco Schweiss</a></span></span>
+<span class="posted-on"><a href="https://marco507.github.io/creating-an-airbnb-like-data-mart/" rel="bookmark"><time class="entry-date published" datetime="2023-07-10T10:17:40+02:00">10. July 2023</time><time class="updated" datetime="2023-11-16T18:06:54+01:00">16. November 2023</time></a></span><span class="posted-by"> <span class="author vcard"><a class="url fn n" href="https://marco507.github.io/author/marco-schweiss/" title="View all posts by Marco Schweiss" rel="author">Marco Schweiss</a></span></span>
 </div>
 		
 	</header><!-- .entry-header -->
@@ -184,7 +183,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14
 	<p>Airbnb was founded in October 2007, stemming from personal experiences of encountering overpriced shared apartments and fully booked hotels during a crowded conference in San Francisco. The original name, Airbedandbreakfast, was later shortened to Airbnb in 2009. Serving as an online platform, Airbnb facilitates the connection between hosts and guests and assumes responsibility for managing the booking process.</p>
 <p>Transactions are conducted through the platform, with guests making payments for their bookings using credit cards. To ensure that the accommodation matches its description on the platform, hosts receive payment 24 hours after the guest&#8217;s arrival. In 2013, Airbnb generated revenue by charging a commission of 6-12% from guests, and 3% from hosts, and amassed a total of $150 million from approximately 10 million overnight stays.</p>
 <p>Every user, whether a host or a guest, creates a profile page on Airbnb. Hosts are required to upload at least one photo and provide a phone number, while guests need to provide more comprehensive information. Hosts have the option to describe their accommodations using text and photos. Both guests and hosts can rate each other based on their experiences. The platform also features a calculator function that allows users to estimate their expected income from their own accommodations.</p>
-<p>A friend of mine asked me to create a proof-of-concept for the Airbnb use case in the form of a data mart. Given that this was a good opportunity to improve my SQL skills I agreed to the development and the following list of requirements:</p>
+<p>To improve my SQL skills, I created a proof-of-concept for the Airbnb use case in the form of a data mart with the following list of requirements:</p>
 <ul>
 <li>
 <strong>Entity Relationship Model (ERM):</strong> Development of an ERM that encompasses the definition of data tables, attributes, and relationships among entities pertaining to the Airbnb use case.</li>
@@ -204,23 +203,20 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14
 <p>In the following sections, we will take a look at how the project was conceptualized and developed.</p>
 <h2>Conception</h2>
 <p>The first step of the project was to derive an appropriate database design. The database design process includes a crucial stage called database modeling, which holds the utmost significance in the overall database design. Any oversights or omissions during this step can have a detrimental impact on the implementation stage, potentially rendering the database useless.</p>
-<p>To initiate the process, the first step involves crafting a comprehensive requirements specification for the Airbnb project. This specification document should encompass a thorough requirements analysis, delving into the following aspects in greater detail:</p>
+<p>To initiate the process, the first step involves crafting a comprehensive requirements specification for the Airbnb project. This specification document should encompass a thorough analysis of the requirements, delving into the following aspects in greater detail:</p>
 <ul>
 <li>Identification of various roles or user groups involved in the system.</li>
 <li>Specification of the actions or activities performed by each of these roles.</li>
 <li>Determination of the necessary data and functions required to fulfill the system&#8217;s requirements.</li>
 </ul>
-<p>The resulting document can be seen below:</p>
-<a href="https://marco507.github.io/wp-content/uploads/2023/07/data-mart_concept.pdf" class="pdfemb-viewer" data-width="max" data-height="max" data-toolbar="bottom" data-toolbar-fixed="off">data-mart_concept<br></a>
+<p>The results are compiled in this <a href="https://marco507.github.io/wp-content/uploads/2023/07/data-mart_concept.pdf" target="_blank" rel="noopener">PDF</a> file.</p>
 <h2>Development</h2>
 <p>The next step was to implement the data mart. Throughout this phase, I ensured that all SQL statements were meticulously documented in my database file.</p>
 <p>Specifically, I delivered the tables and relations for the database in a SQL data file, aligning them with the concepts outlined in the ER-Diagram. Additionally, I diligently documented every SQL statement involved in the creation process.</p>
 <p>To ensure a comprehensive test of the system, I made certain that each table contained a minimum of 20 entries. Furthermore, I created at least one test case for the database, specifically designed to validate its functionality based on the ER-Model.</p>
-<p>By adhering to the provided guidelines and ensuring the documentation and testing of the system a first working version of the data mart was derived. A detailed explanation of the database design and implementation procedure can be seen in the PDF below:</p>
-<a href="https://marco507.github.io/wp-content/uploads/2023/07/data-mart_development.pdf" class="pdfemb-viewer" data-width="max" data-height="max" data-toolbar="bottom" data-toolbar-fixed="off">data-mart_development<br></a>
+<p>By adhering to the provided guidelines and ensuring the documentation and testing of the system, a first working version of the data mart was derived. A detailed explanation of the database design and implementation procedure can be seen in this <a href="https://marco507.github.io/wp-content/uploads/2023/07/data-mart_development.pdf" target="_blank" rel="noopener">PDF</a>.</p>
 <h2>Finalization</h2>
-<p>In this final phase, the goal was to polish and refine the database management system, after having received feedback. Given that only a minor change to the schema of the database was necessary and the first iteration of the data mart was up to standard, this last phase was rather short. The following document sums up the project and shows the changes to the database schema:</p>
-<a href="https://marco507.github.io/wp-content/uploads/2023/07/data-mart_finalization.pdf" class="pdfemb-viewer" data-width="max" data-height="max" data-toolbar="bottom" data-toolbar-fixed="off">data-mart_finalization<br></a>
+<p>In this final phase, the goal was to polish and refine the database management system, after having received feedback. Given that only a minor change to the schema of the database was necessary and the first iteration of the data mart was up to standard, this last phase was rather short. This <a href="https://marco507.github.io/wp-content/uploads/2023/07/data-mart_finalization.pdf" target="_blank" rel="noopener">document</a> sums up the project and shows the changes to the database schema.</p>
 <h2>Conclusion</h2>
 <p>As for my last application, this project was a great opportunity to gain development experience and also to make a deep dive into pure SQL. I really like the final version of the data mart and especially the location search functionality. The code for the data mart and instructions on how to use it can be found in this <a href="https://github.com/marco507/Airbnb-Data-Mart">GitHub repository</a>.</p>
 	
@@ -242,22 +238,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14
 		
 	<section id="secondary" class="sidebar widget-area" role="complementary">
 
-		<div id="block-2" class="widget widget_block widget_search"><form role="search" method="get" action="https://bigdatatime.eu/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search">
-<label class="wp-block-search__label" for="wp-block-search__input-1">Search</label><div class="wp-block-search__inside-wrapper ">
-<input class="wp-block-search__input" id="wp-block-search__input-1" placeholder="" value="" type="search" name="s" required><button aria-label="Search" class="wp-block-search__button wp-element-button" type="submit">Search</button>
-</div>
-</form></div>
-<div id="block-3" class="widget widget_block"><div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
-<h2 class="wp-block-heading">Recent Posts</h2>
-<ul class="wp-block-latest-posts__list wp-block-latest-posts">
-<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/why-are-financial-time-series-called-random-walks/">Why Are Financial Time Series Called Random Walks?</a></li>
-<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/building-a-private-ai-tutor-for-a-microsoft-learn-course/">Building a Private AI Tutor for a Microsoft Learn Course</a></li>
-<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/discovering-in-demand-skills-and-salary-ranges-in-austrias-data-science-job-market/">Discovering In-Demand Skills in Austria&#8217;s Data Science Job Market</a></li>
-<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/statistical-hypothesis-testing-with-parametric-tests/">Statistical Hypothesis Testing with Parametric Tests</a></li>
-<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/pdf-summarization-and-flashcard-generation-with-chatgpt/">PDF Summarization and Flashcard Generation with ChatGPT</a></li>
-</ul>
-</div></div></div>
-<div id="block-6" class="widget widget_block"><div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
+		<div id="block-6" class="widget widget_block"><div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
 <h2 class="wp-block-heading">Categories</h2>
 <ul class="wp-block-categories-list wp-block-categories">	<li class="cat-item cat-item-6">
 <a href="https://marco507.github.io/category/app-development/">App Development</a>
@@ -285,17 +266,16 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14
 </li>
 </ul>
 </div></div></div>
-<div id="block-16" class="widget widget_block">
-<div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
-<h2 class="wp-block-heading">Author</h2>
-
-
-
-<ul>
-<li><a href="https://marco507.github.io/author/marco-schweiss">Marco Schweiss</a></li>
+<div id="block-3" class="widget widget_block"><div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-group__inner-container">
+<h2 class="wp-block-heading">Recent Posts</h2>
+<ul class="wp-block-latest-posts__list wp-block-latest-posts">
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/why-are-financial-time-series-called-random-walks/">Why Are Financial Time Series Called Random Walks?</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/building-a-private-ai-tutor-for-a-microsoft-learn-course/">Building a Private AI Tutor for a Microsoft Learn Course</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/discovering-in-demand-skills-and-salary-ranges-in-austrias-data-science-job-market/">Discovering In-Demand Skills in Austria&#8217;s Data Science Job Market</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/statistical-hypothesis-testing-with-parametric-tests/">Statistical Hypothesis Testing with Parametric Tests</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://marco507.github.io/pdf-summarization-and-flashcard-generation-with-chatgpt/">PDF Summarization and Flashcard Generation with ChatGPT</a></li>
 </ul>
-</div></div>
-</div>
+</div></div></div>
 	</section><!-- #secondary -->
 
 	
@@ -452,7 +432,6 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14
 <button class="cmplz-btn cmplz-hidden cmplz-manage-consent manage-consent-1">Manage consent</button>
 
 </div>
-<link rel="stylesheet" id="pdfemb_embed_pdf_css-css" href="https://marco507.github.io/wp-content/plugins/pdf-embedder/assets/css/pdfemb-embed-pdf.css?ver=4.6.4" type="text/css" media="all">
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js?ver=bb270fba1988038f5680f75b7475565e" id="mathjax-js"></script>
 <script type="text/javascript" id="occasio-navigation-js-extra">
 /* <![CDATA[ */
@@ -462,17 +441,10 @@ var occasioScreenReaderText = {"expand":"Expand child menu","collapse":"Collapse
 <script type="text/javascript" src="https://marco507.github.io/wp-content/themes/occasio/assets/js/navigation.min.js?ver=20220224" id="occasio-navigation-js"></script>
 <script type="text/javascript" id="cmplz-cookiebanner-js-extra">
 /* <![CDATA[ */
-var complianz = {"prefix":"cmplz_","user_banner_id":"1","set_cookies":[],"block_ajax_content":"","banner_version":"12","version":"6.5.5","store_consent":"","do_not_track_enabled":"","consenttype":"optin","region":"eu","geoip":"","dismiss_timeout":"","disable_cookiebanner":"","soft_cookiewall":"","dismiss_on_scroll":"","cookie_expiry":"365","url":"https:\/\/marco507.github.io\/wp-json\/complianz\/v1\/","locale":"lang=en&locale=en_US","set_cookies_on_root":"","cookie_domain":"","current_policy_id":"16","cookie_path":"\/","categories":{"statistics":"statistics","marketing":"marketing"},"tcf_active":"","placeholdertext":"Click to accept {category} cookies and enable this content","aria_label":"Click to accept {category} cookies and enable this content","css_file":"https:\/\/marco507.github.io\/wp-content\/uploads\/complianz\/css\/banner-{banner_id}-{type}.css?v=12","page_links":{"eu":{"cookie-statement":{"title":"Cookie Policy","url":"https:\/\/marco507.github.io\/cookie-policy-eu\/"},"privacy-statement":{"title":"Privacy Policy","url":"https:\/\/marco507.github.io\/privacy-policy\/"},"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"us":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"uk":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"ca":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"au":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"za":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}},"br":{"impressum":{"title":"Imprint","url":"https:\/\/marco507.github.io\/imprint\/"}}},"tm_categories":"","forceEnableStats":"","preview":"","clean_cookies":""};
+var complianz = {"prefix":"cmplz_","user_banner_id":"1","set_cookies":[],"block_ajax_content":"","banner_version":"12","version":"6.5.5","store_consent":"","do_not_track_enabled":"","consenttype":"optin","region":"eu","geoip":"","dismiss_timeout":"","disable_cookiebanner":"","soft_cookiewall":"","dismiss_on_scroll":"","cookie_expiry":"365","url":"https:\/\/marco507.github.io\/wp-json\/complianz\/v1\/","locale":"lang=en&locale=en_US","set_cookies_on_root":"","cookie_domain":"","current_policy_id":"16","cookie_path":"\/","categories":{"statistics":"statistics","marketing":"marketing"},"tcf_active":"","placeholdertext":"Click to accept {category} cookies and enable this content","aria_label":"Click to accept {category} cookies and enable this content","css_file":"https:\/\/marco507.github.io\/wp-content\/uploads\/complianz\/css\/banner-{banner_id}-{type}.css?v=12","page_links":{"eu":{"cookie-statement":{"title":"","url":"https:\/\/marco507.github.io\/creating-an-airbnb-like-data-mart\/"},"privacy-statement":{"title":"Privacy Policy","url":"https:\/\/marco507.github.io\/privacy-policy\/"},"impressum":{"title":"Legal Notice","url":"https:\/\/marco507.github.io\/imprint\/"}},"us":{"impressum":{"title":"Legal Notice","url":"https:\/\/marco507.github.io\/imprint\/"}},"uk":{"impressum":{"title":"Legal Notice","url":"https:\/\/marco507.github.io\/imprint\/"}},"ca":{"impressum":{"title":"Legal Notice","url":"https:\/\/marco507.github.io\/imprint\/"}},"au":{"impressum":{"title":"Legal Notice","url":"https:\/\/marco507.github.io\/imprint\/"}},"za":{"impressum":{"title":"Legal Notice","url":"https:\/\/marco507.github.io\/imprint\/"}},"br":{"impressum":{"title":"Legal Notice","url":"https:\/\/marco507.github.io\/imprint\/"}}},"tm_categories":"","forceEnableStats":"","preview":"","clean_cookies":""};
 /* ]]> */
 </script>
 <script defer type="text/javascript" src="https://marco507.github.io/wp-content/plugins/complianz-gdpr/cookiebanner/js/complianz.min.js?ver=6.5.5" id="cmplz-cookiebanner-js"></script>
-<script type="text/javascript" id="pdfemb_embed_pdf_js-js-extra">
-/* <![CDATA[ */
-var pdfemb_trans = {"worker_src":"https:\/\/marco507.github.io\/wp-content\/plugins\/pdf-embedder\/js\/pdfjs\/pdf.worker.min.js","cmap_url":"https:\/\/marco507.github.io\/wp-content\/plugins\/pdf-embedder\/js\/pdfjs\/cmaps\/","poweredby":"off","objectL10n":{"loading":"Loading...","page":"Page","zoom":"Zoom","prev":"Previous page","next":"Next page","zoomin":"Zoom In","secure":"Secure","zoomout":"Zoom Out","download":"Download PDF","fullscreen":"Full Screen","domainerror":"Error: URL to the PDF file must be on exactly the same domain as the current web page.","clickhereinfo":"Click here for more info","widthheightinvalid":"PDF page width or height are invalid","viewinfullscreen":"View in Full Screen"}};
-/* ]]> */
-</script>
-<script type="text/javascript" src="https://marco507.github.io/wp-content/plugins/pdf-embedder/assets/js/min/all-pdfemb-min.js?ver=bb270fba1988038f5680f75b7475565e" id="pdfemb_embed_pdf_js-js"></script>
-<script type="text/javascript" src="https://marco507.github.io/wp-content/plugins/pdf-embedder/assets/js/pdfjs/pdf.min.js?ver=4.6.4" id="pdfemb_pdf_js-js"></script>
 
 </body>
 </html>
