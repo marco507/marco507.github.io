@@ -3746,7 +3746,7 @@ figcaption,
 /*--------------------------------------------------------------
 ## - Media Queries for Navigation
 --------------------------------------------------------------*/
-@media only screen and (min-width: 400px) {
+@media only screen and (min-width: 0px) {
 	.primary-menu-toggle .menu-toggle-text {
 		display: block;
 		margin-left: 0.75rem;
