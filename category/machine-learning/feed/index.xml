@@ -12,13 +12,13 @@
 	<atom:link href="https://marco507.github.io/category/machine-learning/feed/" rel="self" type="application/rss+xml" />
 	<link>https://marco507.github.io/</link>
 	<description>Programming, AI and Data Science</description>
-	<lastBuildDate>Thu, 16 Nov 2023 17:02:41 +0000</lastBuildDate>
+	<lastBuildDate>Sat, 16 Dec 2023 18:31:35 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	
+	<generator>https://wordpress.org/?v=6.4.2</generator>
 
 <image>
 	<url>https://marco507.github.io/wp-content/uploads/2023/07/cropped-bigdatatime-favicon-3-32x32.png</url>
@@ -28,6 +28,27 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>Topic Modelling with LLMs</title>
+		<link>https://marco507.github.io/topic-modelling-with-llms/</link>
+		
+		<dc:creator><![CDATA[Marco Schweiss]]></dc:creator>
+		<pubDate>Fri, 01 Dec 2023 18:15:36 +0000</pubDate>
+				<category><![CDATA[Machine Learning]]></category>
+		<category><![CDATA[NLP]]></category>
+		<category><![CDATA[Python]]></category>
+		<guid isPermaLink="false">https://marco507.github.io/?p=712</guid>
+
+					<description><![CDATA[The field of natural language processing has witnessed revolutionary advancements with the introduction of large language models (LLMs) such as ChatGPT and GPT-4. This has [...]]]></description>
+										<content:encoded><![CDATA[<p>The field of natural language processing has witnessed revolutionary advancements with the introduction of large language models (LLMs) such as ChatGPT and GPT-4. This has prompted an exploration of how these LLMs can be utilized in topic modeling, an essential technique for comprehending extensive textual corpora. The aim of this project was to examine the trade-offs between traditional statistical algorithms and LLMs for topic modeling. Additionally, the goal was to develop a new approach for topic modeling utilizing the GPT model family, while providing recommendations on when to employ each method. A thorough literature review was conducted to establish the theoretical foundation.</p>
+<p>Subsequently, an experiment was designed to compare the two approaches across three diverse datasets containing different types of documents, namely news, abstracts and tweets. Topic coherence and diversity metrics were employed for quantitative assessment, complemented by qualitative evaluation through GPT-4. Traditional models were found to outperform the LLM-based approach on the news and abstract datasets. Conversely, both qualitative and quantitative analysis demonstrated that the novel LLM approach yielded superior results on the tweet dataset.</p>
+<p>It was determined that traditional topic models are better suited for larger datasets, providing a higher-level overview of topics. In contrast, LLM-based approaches excel at generating granular and interpretable topics from smaller datasets. These findings offer practical recommendations regarding strategy selection in topic modeling applications.</p>
+<p>To read the full article please refer to this <a href="https://marco507.github.io/wp-content/uploads/2023/12/topic-modelling-llms.pdf" target="_blank" rel="noopener">PDF</a> file.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>Emotion Detection in Images</title>
 		<link>https://marco507.github.io/emotion-detection-in-images/</link>
 					<comments>https://marco507.github.io/emotion-detection-in-images/#comments</comments>
